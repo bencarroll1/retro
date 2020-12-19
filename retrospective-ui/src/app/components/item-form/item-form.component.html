@@ -1,0 +1,15 @@
+<div class="container">
+  <form #itemForm="ngForm" (ngSubmit)="onSubmit(); itemForm.reset()">
+    <div class="input-group">
+      <input [(ngModel)]="description" class="form-control form-rounded" name="description"
+             placeholder="Enter Item Description"
+             required/>
+
+      <div class="input-group-append">
+        <button [disabled]="!itemForm.valid" class="btn btn-success" type="submit">
+          <fa-icon [icon]="faCheck"></fa-icon>
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

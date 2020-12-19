@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: Retrospective App
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+---
+spring:
+  profiles: local
+  jpa:
+    show-sql: true

@@ -1,0 +1,77 @@
+<div class="container">
+  <form #retroForm="ngForm" (ngSubmit)="onSubmit(); retroForm.reset()">
+    <div class="form-group">
+      <h3 class="page-header" for="retroNameInput">Create a new retrospective</h3>
+      <div class="input-group">
+        <input [(ngModel)]="retroName" class="form-control form-rounded" id="retroNameInput" name="retroName"
+               placeholder="Enter a retro name"
+               required/>
+        <div class="input-group-append">
+          <button [disabled]="!retroForm.valid" class="btn btn-success" type="submit">
+            <fa-icon [icon]="faCheck"></fa-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <hr/>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-8">
+      </div>
+      <div class="col-4">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><fa-icon [icon]="faSearch"></fa-icon></span>
+          </div>
+          <input [(ngModel)]="retroNameFilter" class="form-control" placeholder="Search" type="text"/>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="clearfix">&nbsp;</div>
+      <div class="col-12">
+        <table class="table table-striped table-borderless">
+          <tbody>
+          <tr *ngFor="let retro of retros">
+            <a [routerLink]="['/retros', retro.id]" style="color: black">
+              <td><strong>{{retro.name}}</strong></td>
+            </a>
+            <td>{{retro.created | date: 'dd/MM/yyyy HH:mm:ss'}}</td>
+            <td class="text-right">
+              <div class="btn-group btn-group-sm">
+                <a [routerLink]="['/retros', retro.id]" class="btn bg-enter">
+                  <fa-icon [icon]="faSignInAlt"></fa-icon>
+                </a>
+              </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL CODE HERE -->
+<ng-template #confirmActionModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">
+      <fa-icon [icon]="faExclamationCircle" style="color: #F78888;"></fa-icon>
+      Delete
+    </h4>
+    <button (click)="modal.close(false)" aria-label="Close" class="close" type="button">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    Are you sure you want to delete that Retro?
+  </div>
+  <div class="modal-footer">
+    <button (click)="modal.close(false)" class="btn bg-action-item" type="button">No, get me out of here!</button>
+    <button (click)="modal.close(true)" class="btn bg-bad" type="button">Yes, do it!</button>
+  </div>
+</ng-template>

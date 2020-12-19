@@ -1,0 +1,86 @@
+.card {
+  float: left;
+  margin: .5%;
+  width: 100%;
+}
+
+.bi-plus {
+  align-self: start;
+  width: 1.3em;
+  height: 1.3em;
+  fill: currentColor;
+}
+
+.form-rounded {
+  border-radius: 1rem;
+}
+
+.row {
+  margin-bottom: 5px;
+}
+
+#itemInputGood, #itemInputBad, #itemInputQuestion {
+  width: 105px;
+}
+
+#item-input-card {
+  margin-bottom: 3px;
+}
+
+.card-body {
+  margin-bottom: 8px;
+}
+
+#action-item-title {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+
+.bg-good {
+  background-color: #6666ff;
+}
+
+.bg-bad {
+  background-color: #6666ff;
+}
+
+.bg-question {
+  background-color: #6666ff;
+}
+
+.bg-action-item {
+  background-color: #6666ff;
+}
+
+.bg-opacity {
+  background-color: rgba(232, 232, 232, 1);
+  opacity: .4;
+  color: black;
+}
+
+.btn {
+  width: 50px;
+}
+
+.top-row {
+  min-height: 75% !important;
+}
+
+.bottom-row {
+  min-height: 25% !important;
+}
+
+.main-container {
+  margin-top: 72px !important;
+  margin-bottom: 56px !important;
+}
+
+.action-items-div {
+  padding: 16px;
+}
+
+.item-card {
+  padding: 2rem !important;
+}
+

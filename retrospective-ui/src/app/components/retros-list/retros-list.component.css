@@ -1,0 +1,45 @@
+.retro-app {
+  margin-top: 5%;
+}
+
+#bottom-row {
+  margin-top: 2%;
+}
+
+#retro-input {
+  margin-top: 2%;
+  width: 100%;
+}
+
+.bi-check {
+  float: right;
+}
+
+.card {
+  margin-top: 3%;
+}
+
+.bg-bad {
+  background-color: #F78888;
+}
+
+.page-header {
+  padding-top: 60px;
+}
+
+.home-page-nav {
+  color: white;
+}
+
+.archive-nav {
+  padding-left: 56px;
+  color: white;
+}
+
+.nav-title {
+  padding: 12px;
+}
+
+.bg-enter {
+  background-color: #bddba8;
+}
