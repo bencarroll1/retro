@@ -1,4 +1,11 @@
 <div class="container">
+
+  <nav class="navbar fixed-top navbar-dark bg-dark">
+    <div class="navbar-brand mb-0 h1">
+      <h4>Retro</h4>
+    </div>
+  </nav>
+
   <form #retroForm="ngForm" (ngSubmit)="onSubmit(); retroForm.reset()">
     <div class="form-group">
       <h3 class="page-header" for="retroNameInput">Create a new retrospective</h3>

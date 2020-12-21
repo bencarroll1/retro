@@ -30,9 +30,9 @@ public class LoadDatabase {
 			Retro retro1 = retrosRepository.save(new Retro("First Retrospective", false));
 			
 			List<Item> itemsForRetro1 = new ArrayList<>();
-			itemsForRetro1.add(new Item("Retro 1 :: Item Number 1 - Good", GOOD, false, 0, retro1));
-			itemsForRetro1.add(new Item("Retro 1 :: Item Number 2 - Bad", BAD, false, 2, retro1));
-			itemsForRetro1.add(new Item("Retro 1 :: Item Number 3 - Question", QUESTION, false, -1, retro1));
+			itemsForRetro1.add(new Item("Retro 1 :: Item Number 1", GOOD, false, 0, retro1));
+			itemsForRetro1.add(new Item("Retro 1 :: Item Number 2", BAD, false, 2, retro1));
+			itemsForRetro1.add(new Item("Retro 1 :: Item Number 3", QUESTION, false, -1, retro1));
 			itemsRepository.saveAll(itemsForRetro1);
 			
 			List<ActionItem> actionItemsForRetro1 = new ArrayList<>();
@@ -45,9 +45,9 @@ public class LoadDatabase {
 			Retro retro2 = retrosRepository.save(new Retro("Second Retrospective", true));
 			
 			List<Item> itemsForRetro2 = new ArrayList<>();
-			itemsForRetro2.add(new Item("Retro 2 :: Item Number 1 - Bad", BAD, false, -4, retro2));
-			itemsForRetro2.add(new Item("Retro 2 :: Item Number 2 - Question", QUESTION, false, -1, retro2));
-			itemsForRetro2.add(new Item("Retro 2 :: Item Number 3 - Good", GOOD, false, 3, retro2));
+			itemsForRetro2.add(new Item("Retro 2 :: Item Number 1", BAD, false, -4, retro2));
+			itemsForRetro2.add(new Item("Retro 2 :: Item Number 2", QUESTION, false, -1, retro2));
+			itemsForRetro2.add(new Item("Retro 2 :: Item Number 3", GOOD, false, 3, retro2));
 			itemsRepository.saveAll(itemsForRetro2);
 			
 			List<ActionItem> actionItemsForRetro2 = new ArrayList<>();

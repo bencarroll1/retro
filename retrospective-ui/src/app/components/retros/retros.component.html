@@ -22,7 +22,6 @@
           <div *ngFor="let item of retroService.items"
                [ngClass]="{'bg-opacity': item.itemFlag, 'bg-good': !item.itemFlag}"
                class="card bg-good text-center p-3 item-card">
-            <a class="vote">{{item.itemVotes}}</a>
             <div class="card-body">
               <a>{{item.description}}</a>
             </div>
@@ -41,7 +40,7 @@
           <div *ngFor="let item of retroService.items"
                [ngClass]="{'bg-opacity': item.itemFlag, 'bg-question': !item.itemFlag}"
                class="card bg-question text-center p-3 item-card">
-            <a class="vote">{{item.itemVotes}}</a>
+<!--            <a class="vote">{{item.itemVotes}}</a>-->
             <div class="card-body">
               <a>{{item.description}}</a>
             </div>
@@ -60,7 +59,7 @@
           <div *ngFor="let item of retroService.items"
                [ngClass]="{'bg-opacity': item.itemFlag, 'bg-bad': !item.itemFlag}"
                class="card bg-bad text-center p-3 item-card">
-            <a class="vote">{{item.itemVotes}}</a>
+<!--            <a class="vote">{{item.itemVotes}}</a>-->
             <div class="card-body">
               <a>{{item.description}}</a>
             </div>
