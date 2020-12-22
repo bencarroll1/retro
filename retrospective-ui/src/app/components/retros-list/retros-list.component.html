@@ -62,23 +62,3 @@
     </div>
   </div>
 </div>
-
-<!-- MODAL CODE HERE -->
-<ng-template #confirmActionModal let-modal>
-  <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">
-      <fa-icon [icon]="faExclamationCircle" style="color: #F78888;"></fa-icon>
-      Delete
-    </h4>
-    <button (click)="modal.close(false)" aria-label="Close" class="close" type="button">
-      <span aria-hidden="true">×</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    Are you sure you want to delete that Retro?
-  </div>
-  <div class="modal-footer">
-    <button (click)="modal.close(false)" class="btn bg-action-item" type="button">No, get me out of here!</button>
-    <button (click)="modal.close(true)" class="btn bg-bad" type="button">Yes, do it!</button>
-  </div>
-</ng-template>

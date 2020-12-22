@@ -26,6 +26,8 @@ class RetrosControllerTest {
 	@MockBean
 	private RetrosService retrosService;
 	
+	//test to get all retrospectives when the retrospectives exist
+	//ensures the response returned from /api/retros/ matches the expected list and returns a 200 response code
 	@Test
 	void getAllRetrosWhenRetrosExist() throws Exception {
 		// given

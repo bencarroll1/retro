@@ -11,8 +11,10 @@ import {ItemFormComponent} from './components/item-form/item-form.component';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {ActionItemFormComponent} from './components/action-item-form/action-item-form.component';
+
 @NgModule({
   declarations: [
+    // declaring components
     AppComponent,
     RetrosListComponent,
     RetrosComponent,
@@ -20,6 +22,7 @@ import {ActionItemFormComponent} from './components/action-item-form/action-item
     ActionItemFormComponent
   ],
   imports: [
+    // declaring imports
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,

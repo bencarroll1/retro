@@ -3,6 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {RetrosListComponent} from './components/retros-list/retros-list.component';
 import {RetrosComponent} from './components/retros/retros.component';
 
+// routing for frontend endpoints
 const routes: Routes =
   [{path: 'retros', component: RetrosListComponent},
     {

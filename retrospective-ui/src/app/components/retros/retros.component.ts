@@ -6,6 +6,7 @@ import {Item} from '../../models/item';
 import {ActionItem} from '../../models/actionItem';
 
 import {Observable, Subscription} from 'rxjs';
+// icons import
 import {
   faArrowDown,
   faArrowLeft,
@@ -58,6 +59,7 @@ export class RetrosComponent implements OnInit, OnDestroy {
   actionItemSubscription: Subscription;
   actionItemInterval;
 
+  // adding item types (good, bad, question) and action items as child elements of a retro
   @ViewChild('htmlDataGoodItems') htmlDataGoodItems: ElementRef;
   @ViewChild('htmlDataQuestionItems') htmlDataQuestionItems: ElementRef;
   @ViewChild('htmlDataBadItems') htmlDataBadItems: ElementRef;
@@ -67,6 +69,7 @@ export class RetrosComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    // get retro and contents by id start of this component and sub to it
     this.retroService.getRetroById(this.id).subscribe(response => this.retroName = response.body.name);
 
     // initial first load
@@ -94,6 +97,7 @@ export class RetrosComponent implements OnInit, OnDestroy {
   }
 
   getRetroItems() {
+    // get retros items
     console.log('fetching retro items');
     this.retroService.getRetroItemsById(this.id).subscribe(response => {
       this.retroService.items = this.sortItems(response.body);
@@ -101,12 +105,14 @@ export class RetrosComponent implements OnInit, OnDestroy {
   }
 
   sortItems(itemsArray: Item[]): Item[] {
+    // sort items by if item is done or not: method needs work
     return itemsArray.sort((a, b) => {
       return (a.itemFlag === b.itemFlag) ? 0 : a.itemFlag ? 1 : -1;
     });
   }
 
   getRetroActionItems() {
+    // get retros action items
     console.log('fetching retro action items');
     this.retroService.getRetroActionItemsById(this.id).subscribe(response => {
       this.actionItems = response.body;

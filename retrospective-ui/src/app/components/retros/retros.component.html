@@ -16,9 +16,10 @@
           Things That Went Well:
         </h3>
         <div class=" text-center p-3">
+          <!--          getting good items, sorted by done/not-->
           <app-item-form [(retroId)]="id" itemType="GOOD"></app-item-form>
         </div>
-        <div id="htmlDataGoodItems" #htmlDataGoodItems>
+        <div #htmlDataGoodItems id="htmlDataGoodItems">
           <div *ngFor="let item of retroService.items"
                [ngClass]="{'bg-opacity': item.itemFlag, 'bg-good': !item.itemFlag}"
                class="card bg-good text-center p-3 item-card">
@@ -34,13 +35,14 @@
           Questions About The Sprint:
         </h3>
         <div class="text-center p-3">
+          <!--          getting question items, sorted by done/not-->
           <app-item-form [(retroId)]="id" itemType="QUESTION"></app-item-form>
         </div>
-        <div id="htmlDataQuestionItems" #htmlDataQuestionItems>
+        <div #htmlDataQuestionItems id="htmlDataQuestionItems">
           <div *ngFor="let item of retroService.items"
                [ngClass]="{'bg-opacity': item.itemFlag, 'bg-question': !item.itemFlag}"
                class="card bg-question text-center p-3 item-card">
-<!--            <a class="vote">{{item.itemVotes}}</a>-->
+            <!--            <a class="vote">{{item.itemVotes}}</a>-->
             <div class="card-body">
               <a>{{item.description}}</a>
             </div>
@@ -53,13 +55,14 @@
           Things That Did Not Go So Well:
         </h3>
         <div class="text-center p-3">
+          <!--          getting bad items, sorted by done/not-->
           <app-item-form [(retroId)]="id" itemType="BAD"></app-item-form>
         </div>
-        <div id="htmlDataBadItems" #htmlDataBadItems>
+        <div #htmlDataBadItems id="htmlDataBadItems">
           <div *ngFor="let item of retroService.items"
                [ngClass]="{'bg-opacity': item.itemFlag, 'bg-bad': !item.itemFlag}"
                class="card bg-bad text-center p-3 item-card">
-<!--            <a class="vote">{{item.itemVotes}}</a>-->
+            <!--            <a class="vote">{{item.itemVotes}}</a>-->
             <div class="card-body">
               <a>{{item.description}}</a>
             </div>
@@ -74,7 +77,8 @@
         <h2 class="text-center" id="action-item-title">Action Items</h2>
         <app-action-item-form [(retroId)]="id"></app-action-item-form>
         <div class="container-fluid action-items-div">
-          <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1" id="htmlDataActionItems" #htmlDataActionItems>
+          <!--          getting retro action items-->
+          <div #htmlDataActionItems class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1" id="htmlDataActionItems">
             <div *ngFor="let actionItem of actionItems" class="col">
               <div class="card bg-action-item">
                 <div class="card-body">

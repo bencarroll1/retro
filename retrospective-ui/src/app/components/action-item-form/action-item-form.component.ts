@@ -23,6 +23,7 @@ export class ActionItemFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.actionItemForm = new FormGroup({
+      // preforming validation on entries to the action item form
       description: new FormControl(this.description, [
         Validators.required,
         Validators.maxLength(100)
@@ -34,6 +35,7 @@ export class ActionItemFormComponent implements OnInit {
     const actionItem: ActionItem = {
       description: this.description,
     };
+    // on submission call the add action item to retro method, add the action item to the specified retro
     this.retroService.addActionItemToRetro(actionItem, this.retroId).subscribe((actionItem: ActionItem) => {
       console.log(actionItem);
     });

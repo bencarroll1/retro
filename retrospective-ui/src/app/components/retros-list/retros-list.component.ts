@@ -29,6 +29,7 @@ export class RetrosListComponent implements OnInit {
   retros: Retro[] = [];
   retroForm: FormGroup;
 
+  // form for creating a new retrospective
   constructor(private retroService: RetroService, private modalService: NgbModal) {
     this.retroForm = new FormGroup({
       retroName: new FormControl(this.retroName, [
@@ -38,6 +39,7 @@ export class RetrosListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // on start of component, get all retrospectives
     this.retroService.getRetros().subscribe((response) => {
       this.retros = this.sortRetros(response.body);
     });
@@ -54,6 +56,7 @@ export class RetrosListComponent implements OnInit {
   }
 
   sortRetros(retrosArray: Retro[]): Retro[] {
+    // sort retrospectives by date
     return retrosArray.sort((a, b) => {
       return (new Date(b.created) as any) - (new Date(a.created) as any);
     });
