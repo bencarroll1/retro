@@ -21,7 +21,6 @@ import javax.persistence.Table;
 @Table(name = "retros")
 //class inherits characteristics from BaseEntity
 public class Retro extends BaseEntity {
-	
 	//setting columns in actionItems table
 	@Column(name = "name", nullable = false)
 	private String name;
