@@ -1,5 +1,6 @@
 package com.retrospective.services;
 
+import com.retrospective.exceptions.RetrosNotFoundException;
 import com.retrospective.models.ActionItem;
 import com.retrospective.models.Item;
 import com.retrospective.models.Retro;
@@ -36,9 +37,9 @@ public class RetrosService {
 	}
 	
 	//method to get a retrospective by ID from retros repo. method called by controller
-	public Retro getRetroById(Long id) throws Exception {
+	public Retro getRetroById(Long id) throws RetrosNotFoundException {
 		return retrosRepository.findById(id)
-				.orElseThrow(Exception::new);
+				.orElseThrow(RetrosNotFoundException::new);
 	}
 	
 	//method to get a retrospectives items from items repo. method called by controller
@@ -52,14 +53,14 @@ public class RetrosService {
 	}
 	
 	//method to add a retrospective item to items repo. method called by controller
-	public Item addItemToRetro(Long id, Item item) throws Exception {
+	public Item addItemToRetro(Long id, Item item) throws RetrosNotFoundException {
 		Retro retro = getRetroById(id);
 		item.setRetro(retro);
 		return itemsRepository.save(item);
 	}
 	
 	//method to add a retrospective action item to items repo. method called by controller
-	public ActionItem addActionItemToRetro(Long id, ActionItem actionItem) throws Exception {
+	public ActionItem addActionItemToRetro(Long id, ActionItem actionItem) throws RetrosNotFoundException {
 		Retro retro = getRetroById(id);
 		actionItem.setRetro(retro);
 		return actionItemsRepository.save(actionItem);
