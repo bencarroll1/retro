@@ -46,6 +46,19 @@ export class RetroService {
     return this.http.get<Retro>(this.urlPrefix + id, {observe: 'response'});
   }
 
+  // method to update a retros contents by ID
+  updateRetroById(updateRetro: Retro): void {
+    this.http.put<Retro>(this.urlPrefix + updateRetro.id, updateRetro, this.httpOptions).subscribe(response => {
+      this.retros = this.retros.filter((retro) => {
+        return retro.id !== updateRetro.id;
+      });
+      this.retros.push(updateRetro);
+      console.log(response);
+    }, error => {
+      console.error('Error updating item: ', error);
+    });
+  }
+
   // method to get a retrospectives items by ID from the API
   getRetroItemsById(id): Observable<HttpResponse<Item[]>> {
     return this.http.get<Item[]>(this.urlPrefix + id + this.itemsUrlSuffix, {observe: 'response'});
@@ -66,4 +79,44 @@ export class RetroService {
     return this.http.post<ActionItem>(this.urlPrefix + id + this.actionItemsUrlSuffix, actionItem, this.httpOptions);
   }
 
+  // method to delete a retrospective by ID
+  deleteRetroById(retroId): Observable<void> {
+    return this.http.delete<void>(this.urlPrefix + retroId, this.httpOptions);
+  }
+
+  // method to delete a retrospectives items by item id
+  deleteRetroItemById(itemId): Observable<void> {
+    return this.http.delete<void>(this.urlPrefixItems + itemId, this.httpOptions);
+  }
+
+  // method to delete a retrospectives action items by action item id
+  deleteRetroActionItemById(actionItemId): Observable<void> {
+    return this.http.delete<void>(this.urlPrefixActionItems + actionItemId, this.httpOptions);
+  }
+
+  // method to update a retrospective item by id
+  updateRetroItemById(updateItem: Item): void {
+    this.http.put<Item>(this.urlPrefixItems + updateItem.id, updateItem, this.httpOptions).subscribe(response => {
+      this.items = this.items.filter((item) => {
+        return item.id !== updateItem.id;
+      });
+      this.items.push(updateItem);
+      console.log(response);
+    }, error => {
+      console.error('Error updating item: ', error);
+    });
+  }
+
+  // method to update a retrospective action item by id
+  updateRetroActionItemById(updateActionItem: ActionItem): void {
+    this.http.put<ActionItem>(this.urlPrefixActionItems + updateActionItem.id, updateActionItem, this.httpOptions).subscribe(response => {
+      this.actionItems = this.actionItems.filter((actionItem) => {
+        return actionItem.id !== updateActionItem.id;
+      });
+      this.actionItems.push(updateActionItem);
+      console.log(response);
+    }, error => {
+      console.error('Error updating item: ', error);
+    });
+  }
 }

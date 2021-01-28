@@ -119,4 +119,102 @@ export class RetrosComponent implements OnInit, OnDestroy {
     });
   }
 
+  deleteRetroItemById(itemId) {
+    this.retroService.deleteRetroItemById(itemId).subscribe((response) => {
+      this.retroService.items = this.retroService.items.filter((item) => {
+        return item.id !== itemId;
+      });
+    });
+  }
+
+  deleteRetroActionItemById(actionItemId) {
+    this.retroService.deleteRetroActionItemById(actionItemId).subscribe((response) => {
+      this.actionItems = this.actionItems.filter((actionItem) => {
+        return actionItem.id !== actionItemId;
+      });
+    });
+  }
+
+  openItem(content, itemId) {
+    console.log(itemId);
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      console.log(`Modal result: ${result}`);
+      if (result) {
+        this.deleteRetroItemById(itemId);
+      }
+    }, (reason) => {
+      console.log(`Modal dismissed: ${reason}`);
+    });
+  }
+
+  openActionItem(content, actionItemId) {
+    console.log(actionItemId);
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      console.log(`Modal result: ${result}`);
+      if (result) {
+        this.deleteRetroActionItemById(actionItemId);
+      }
+    }, (reason) => {
+      console.log(`Modal dismissed: ${reason}`);
+    });
+  }
+
+  itemIsDone(item: Item) {
+    item.itemFlag = !item.itemFlag;
+    console.log(item.id);
+    console.log(item.itemFlag);
+    this.retroService.updateRetroItemById(item);
+  }
+
+  upVoteItem(item: Item) {
+    item.itemVotes = item.itemVotes + 1;
+    console.log('Item ID: ' + item.id);
+    console.log('Current vote: ' + item.itemVotes);
+    this.retroService.updateRetroItemById(item);
+  }
+
+  downVoteItem(item: Item) {
+    item.itemVotes = item.itemVotes - 1;
+    console.log('Item ID: ' + item.id);
+    console.log('Current vote: ' + item.itemVotes);
+    this.retroService.updateRetroItemById(item);
+  }
+
+  updateItemDescription(item: Item) {
+    console.log(item.id);
+    console.log(item.description);
+    this.retroService.updateRetroItemById(item);
+  }
+
+  openItemEditor(content, item) {
+    console.log(item);
+    this.editItem = JSON.parse(JSON.stringify(item));
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title-edit-item'}).result.then((result) => {
+      console.log(`Modal result: ${result}`);
+      if (result) {
+        this.updateItemDescription(this.editItem);
+      }
+    }, (reason) => {
+      console.log(`Modal dismissed: ${reason}`);
+    });
+  }
+
+  updateActionItemDescription(actionItem: ActionItem) {
+    console.log(actionItem.id);
+    console.log(actionItem.description);
+    this.retroService.updateRetroActionItemById(actionItem);
+  }
+
+  openActionItemEditor(content, actionItem) {
+    console.log(actionItem);
+    this.editActionItem = JSON.parse(JSON.stringify(actionItem));
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title-edit-action-item'}).result.then((result) => {
+      console.log(`Modal result: ${result}`);
+      if (result) {
+        this.updateActionItemDescription(this.editActionItem);
+      }
+    }, (reason) => {
+      console.log(`Modal dismissed: ${reason}`);
+    });
+  }
 }

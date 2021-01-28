@@ -62,4 +62,32 @@ export class RetrosListComponent implements OnInit {
     });
   }
 
+  // MODAL STUFF
+  open(content, retroId) {
+    console.log(retroId);
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      console.log(`Modal result: ${result}`);
+      // a true result from modal means delete the retro
+      if (result) {
+        this.deleteRetroById(retroId);
+      }
+    }, (reason) => {
+      console.log(`Modal dismissed: ${reason}`);
+    });
+  }
+
+  archiveRetro(retro: Retro) {
+    retro.archiveRetroFlag = !retro.archiveRetroFlag;
+    console.log('Retro (ID: ' + retro.id + ') archive status: ' + retro.archiveRetroFlag);
+    this.retroService.updateRetroById(retro);
+  }
+
+  private deleteRetroById(retroId) {
+    this.retroService.deleteRetroById(retroId).subscribe((response) => {
+      // successfully deleted now filter it out of the retros array to the UI is updated
+      this.retros = this.retros.filter((retro) => {
+        return retro.id !== retroId;
+      });
+    });
+  }
 }

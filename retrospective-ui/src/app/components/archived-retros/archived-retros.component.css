@@ -1,22 +1,9 @@
-.ng-valid[required], .ng-valid.required {
-  border-left: 5px solid #42A948; /* green */
-}
-
-.ng-invalid:not(form) {
-  border-left: 5px solid #a94442; /* red */
-}
-
 .retro-app {
   margin-top: 5%;
 }
 
 #bottom-row {
   margin-top: 2%;
-}
-
-#retro-input {
-  margin-top: 2%;
-  width: 100%;
 }
 
 .bi-check {
@@ -27,16 +14,8 @@
   margin-top: 3%;
 }
 
-.bg-bad {
-  background-color: #F78888;
-}
-
-.bg-archive {
+.bg-action-item {
   background-color: #90CCF4;
-}
-
-.page-header {
-  padding-top: 60px;
 }
 
 .home-page-nav {
@@ -52,6 +31,15 @@
   padding: 12px;
 }
 
+.search-bar {
+  padding-top: 60px;
+}
+
+.bg-unarchive {
+  background-color: #90CCF4;
+}
+
 .bg-enter {
   background-color: #bddba8;
 }
+

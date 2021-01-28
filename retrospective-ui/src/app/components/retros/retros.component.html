@@ -13,38 +13,70 @@
 
       <div class="col-4">
         <h3 class="text-center p-3">
-          Things That Went Well:
+          <fa-icon [icon]="faSmile" alt="Good items:"></fa-icon>
         </h3>
         <div class=" text-center p-3">
-          <!--          getting good items, sorted by done/not-->
           <app-item-form [(retroId)]="id" itemType="GOOD"></app-item-form>
         </div>
-        <div #htmlDataGoodItems id="htmlDataGoodItems">
-          <div *ngFor="let item of retroService.items"
+        <table id="htmlDataGoodItems" #htmlDataGoodItems>
+          <div *ngFor="let item of retroService.items | itemFilter: 'GOOD' | sortByVotes"
                [ngClass]="{'bg-opacity': item.itemFlag, 'bg-good': !item.itemFlag}"
                class="card bg-good text-center p-3 item-card">
+            <button (click)="upVoteItem(item)" class="btn btn-outline-vote-item up-vote">
+              <fa-icon [icon]="faArrowUp"></fa-icon>
+            </button>
+            <a class="vote">{{item.itemVotes}}</a>
+            <button (click)="downVoteItem(item)" class="btn btn-outline-vote-item down-vote">
+              <fa-icon [icon]="faArrowDown"></fa-icon>
+            </button>
             <div class="card-body">
               <a>{{item.description}}</a>
+              <button (click)="itemIsDone(item)" class="btn btn-outline-dark-done btn-check item-done">
+                <fa-icon [icon]="faCheck"></fa-icon>
+              </button>
+              <button (click)="openItem(confirmActionModal, item.id)"
+                      class="btn btn-outline-red-trash-item float-right">
+                <fa-icon [icon]="faTrash"></fa-icon>
+              </button>
+              <button (click)="openItemEditor(confirmEditItemActionModal, item)"
+                      class="btn btn-outline-purple-edit-item">
+                <fa-icon [icon]="faEdit"></fa-icon>
+              </button>
             </div>
           </div>
-        </div>
+        </table>
       </div>
 
       <div class="col-4">
         <h3 class="text-center p-3">
-          Questions About The Sprint:
+          <fa-icon [icon]="faQuestion"></fa-icon>
         </h3>
         <div class="text-center p-3">
-          <!--          getting question items, sorted by done/not-->
           <app-item-form [(retroId)]="id" itemType="QUESTION"></app-item-form>
         </div>
-        <div #htmlDataQuestionItems id="htmlDataQuestionItems">
-          <div *ngFor="let item of retroService.items"
+        <div id="htmlDataQuestionItems" #htmlDataQuestionItems>
+          <div *ngFor="let item of retroService.items | itemFilter: 'QUESTION' | sortByVotes"
                [ngClass]="{'bg-opacity': item.itemFlag, 'bg-question': !item.itemFlag}"
                class="card bg-question text-center p-3 item-card">
-            <!--            <a class="vote">{{item.itemVotes}}</a>-->
+            <button (click)="upVoteItem(item)" class="btn btn-outline-vote-item up-vote">
+              <fa-icon [icon]="faArrowUp"></fa-icon>
+            </button>
+            <a class="vote">{{item.itemVotes}}</a>
+            <button (click)="downVoteItem(item)" class="btn btn-outline-vote-item down-vote">
+              <fa-icon [icon]="faArrowDown"></fa-icon>
+            </button>
             <div class="card-body">
               <a>{{item.description}}</a>
+              <button (click)="itemIsDone(item)" class="btn btn-outline-dark-done btn-check item-done">
+                <fa-icon [icon]="faCheck"></fa-icon>
+              </button>
+              <button (click)="openItem(confirmActionModal, item.id)" class="btn btn-outline-red-trash-item">
+                <fa-icon [icon]="faTrash"></fa-icon>
+              </button>
+              <button (click)="openItemEditor(confirmEditItemActionModal, item)"
+                      class="btn btn-outline-purple-edit-item">
+                <fa-icon [icon]="faEdit"></fa-icon>
+              </button>
             </div>
           </div>
         </div>
@@ -52,24 +84,38 @@
 
       <div class="col-4">
         <h3 class="text-center p-3">
-          Things That Did Not Go So Well:
+          <fa-icon [icon]="faFrown"></fa-icon>
         </h3>
         <div class="text-center p-3">
-          <!--          getting bad items, sorted by done/not-->
           <app-item-form [(retroId)]="id" itemType="BAD"></app-item-form>
         </div>
-        <div #htmlDataBadItems id="htmlDataBadItems">
-          <div *ngFor="let item of retroService.items"
+        <div id="htmlDataBadItems" #htmlDataBadItems>
+          <div *ngFor="let item of retroService.items | itemFilter: 'BAD' | sortByVotes"
                [ngClass]="{'bg-opacity': item.itemFlag, 'bg-bad': !item.itemFlag}"
                class="card bg-bad text-center p-3 item-card">
-            <!--            <a class="vote">{{item.itemVotes}}</a>-->
+            <button (click)="upVoteItem(item)" class="btn btn-outline-vote-item up-vote">
+              <fa-icon [icon]="faArrowUp"></fa-icon>
+            </button>
+            <a class="vote">{{item.itemVotes}}</a>
+            <button (click)="downVoteItem(item)" class="btn btn-outline-vote-item down-vote">
+              <fa-icon [icon]="faArrowDown"></fa-icon>
+            </button>
             <div class="card-body">
               <a>{{item.description}}</a>
+              <button (click)="itemIsDone(item)" class="btn btn-outline-dark-done btn-check item-done">
+                <fa-icon [icon]="faCheck"></fa-icon>
+              </button>
+              <button (click)="openItem(confirmActionModal, item.id)" class="btn btn-outline-red-trash-item">
+                <fa-icon [icon]="faTrash"></fa-icon>
+              </button>
+              <button (click)="openItemEditor(confirmEditItemActionModal, item)"
+                      class="btn btn-outline-purple-edit-item">
+                <fa-icon [icon]="faEdit"></fa-icon>
+              </button>
             </div>
           </div>
         </div>
       </div>
-
     </div>
 
     <div class="row bottom-row" id="bottom-row">
@@ -77,12 +123,19 @@
         <h2 class="text-center" id="action-item-title">Action Items</h2>
         <app-action-item-form [(retroId)]="id"></app-action-item-form>
         <div class="container-fluid action-items-div">
-          <!--          getting retro action items-->
-          <div #htmlDataActionItems class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1" id="htmlDataActionItems">
+          <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1" id="htmlDataActionItems" #htmlDataActionItems>
             <div *ngFor="let actionItem of actionItems" class="col">
               <div class="card bg-action-item">
                 <div class="card-body">
                   <a>{{actionItem.description}}</a>
+                  <button (click)="openActionItem(confirmActionModal, actionItem.id)"
+                          class="btn btn-outline-red-trash-action-item">
+                    <fa-icon [icon]="faTrash"></fa-icon>
+                  </button>
+                  <button (click)="openActionItemEditor(confirmEditActionItemActionModal, actionItem)"
+                          class="btn btn-outline-purple-edit-action-item">
+                    <fa-icon [icon]="faEdit"></fa-icon>
+                  </button>
                 </div>
               </div>
             </div>
@@ -92,3 +145,71 @@
     </div>
   </div>
 </div>
+<!-- MODAL CODE DOWN HERE -->
+<ng-template #confirmActionModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">
+      <fa-icon [icon]="faExclamationCircle" style="color: #F78888;"></fa-icon>
+      Delete
+    </h4>
+    <button (click)="modal.close(false)" aria-label="Close" class="close" type="button">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    Are you sure you want to delete this?
+  </div>
+  <div class="modal-footer">
+    <button (click)="modal.close(false)" class="btn bg-action-item form-rounded" style="width: 45%" type="button">No,
+      get
+      me out of here!
+    </button>
+    <button (click)="modal.close(true)" class=" btn bg-bad form-rounded" style="width: 25%" type="button">Yes, do
+      it!
+    </button>
+  </div>
+</ng-template>
+
+<!-- ITEM EDIT MODAL -->
+<ng-template #confirmEditItemActionModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title-edit-item">
+      <fa-icon [icon]="faEdit"></fa-icon>
+      Item Editor
+    </h4>
+    <button (click)="modal.close(false)" aria-label="Close" class="close" type="button">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <input [(ngModel)]="editItem.description" class="form-control form-rounded" name="description"/>
+  </div>
+  <div class="modal-footer">
+    <button (click)="modal.close(false)" class="btn bg-action-item form-rounded" style="width: 45%" type="button">Cancel
+    </button>
+    <button (click)="modal.close(true)" class=" btn bg-good form-rounded" style="width: 25%" type="button">Save
+    </button>
+  </div>
+</ng-template>
+
+<!-- ITEM EDIT MODAL -->
+<ng-template #confirmEditActionItemActionModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title-edit-action-item">
+      <fa-icon [icon]="faEdit"></fa-icon>
+      Action Item Editor
+    </h4>
+    <button (click)="modal.close(false)" aria-label="Close" class="close" type="button">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <input [(ngModel)]="editActionItem.description" class="form-control form-rounded" name="description"/>
+  </div>
+  <div class="modal-footer">
+    <button (click)="modal.close(false)" class="btn bg-action-item form-rounded" style="width: 45%" type="button">Cancel
+    </button>
+    <button (click)="modal.close(true)" class=" btn bg-good form-rounded" style="width: 25%" type="button">Save
+    </button>
+  </div>
+</ng-template>

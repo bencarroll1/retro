@@ -1,0 +1,54 @@
+<div class="container">
+  <nav class="navbar fixed-top navbar-dark bg-dark">
+    <div class="navbar-brand mb-0 h1">
+      <a [routerLink]="['../']" class="home-page-nav">
+        <fa-icon [icon]="faHome" class="btn-outline-arrow-header"></fa-icon>
+        <a class="nav-title">Home Page</a>
+      </a>
+      <a [routerLink]="['/archived-retros']" class="archive-nav">
+        <fa-icon [icon]="faArchive" class="btn-outline-arrow-header fa-spin"></fa-icon>
+        <a class="nav-title">Archived Retros</a>
+      </a>
+    </div>
+  </nav>
+  <div class="container-fluid search-bar">
+    <div class="row">
+      <div class="col-8">
+      </div>
+      <div class="col-4">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><fa-icon [icon]="faSearch"></fa-icon></span>
+          </div>
+          <input [(ngModel)]="retroNameFilter" class="form-control" placeholder="Search" type="text"/>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="clearfix">&nbsp;</div>
+      <div class="col-12">
+        <table class="table table-striped table-borderless">
+          <tbody>
+          <tr *ngFor="let retro of retros | retroArchiveFilter: true">
+            <a [routerLink]="['/retros', retro.id]" style="color: black">
+              <td><strong>{{retro.name}}</strong></td>
+            </a>
+            <td>{{retro.created | date: 'dd/MM/yyyy HH:mm:ss'}}</td>
+            <td class="text-right">
+              <div class="btn-group btn-group-sm">
+                <a [routerLink]="['/retros', retro.id]" class="btn bg-enter">
+                  <fa-icon [icon]="faSignInAlt"></fa-icon>
+                </a>
+                <button (click)="archiveRetro(retro)" class="btn bg-unarchive">
+                  <fa-icon [icon]="fatTimes"></fa-icon>
+                </button>
+              </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

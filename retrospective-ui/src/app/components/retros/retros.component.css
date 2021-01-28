@@ -38,19 +38,19 @@
 
 
 .bg-good {
-  background-color: #89cff0;
+  background-color: #77DD77;
 }
 
 .bg-bad {
-  background-color: #89cff0;
+  background-color: #F78888;
 }
 
 .bg-question {
-  background-color: #89cff0;
+  background-color: #F3D250;
 }
 
 .bg-action-item {
-  background-color: #89cff0;
+  background-color: #90CCF4;
 }
 
 .bg-opacity {
@@ -71,6 +71,130 @@
   min-height: 25% !important;
 }
 
+.btn-outline-red-trash-item {
+  position: absolute;
+  bottom: 64px;
+  right: 16px;
+}
+
+.btn-outline-red-trash-item {
+  color: #fff;
+}
+
+.btn-outline-red-trash-item:hover {
+  color: #c82333;
+  background-color: #fff;
+  border-color: #fff;
+}
+
+.btn-outline-red-trash-item:not(:disabled):not(.disabled):active, .btn-outline-red-trash-item:not(:disabled):not(.disabled).active,
+.show > .btn-outline-red-trash-item.dropdown-toggle {
+  color: #c82333;
+  background-color: #fff;
+  border-color: #fff;
+}
+
+.btn-outline-red-trash-action-item {
+  position: absolute;
+  bottom: 18px;
+  right: 4px;
+}
+
+.btn-outline-red-trash-action-item {
+  color: #fff;
+}
+
+.btn-outline-red-trash-action-item:hover {
+  color: #c82333;
+  background-color: #fff;
+  border-color: #fff;
+}
+
+.btn-outline-red-trash-action-item:not(:disabled):not(.disabled):active, .btn-outline-red-trash-action-item:not(:disabled):not(.disabled).active,
+.show > .btn-outline-red-trash-action-item.dropdown-toggle {
+  color: #c82333;
+  background-color: #fff;
+  border-color: #fff;
+}
+
+.item-done {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  padding-bottom: 2%;
+}
+
+.up-vote {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+}
+
+.down-vote {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+}
+
+.vote {
+  position: absolute;
+  top: 70px;
+  left: 36px;
+  color: white;
+}
+
+.btn-outline-purple-edit-item {
+  position: absolute;
+  bottom: 16px;
+  right: 14px;
+}
+
+.btn-outline-purple-edit-item {
+  color: #fff;
+}
+
+.btn-outline-purple-edit-item:hover {
+  color: #996FD6;
+  background-color: #fff;
+  border-color: #fff;
+}
+
+.btn-outline-purple-edit-item:not(:disabled):not(.disabled):active, .btn-outline-purple-edit-item:not(:disabled):not(.disabled).active,
+.show > .btn-outline-purple-edit-item.dropdown-toggle {
+  color: #996FD6;
+  background-color: #fff;
+  border-color: #fff;
+}
+
+.btn-outline-purple-edit-action-item {
+  position: absolute;
+  bottom: 18px;
+  right: 2px;
+  margin-right: 12%;
+}
+
+.btn-outline-purple-edit-action-item {
+  color: #fff;
+}
+
+.btn-outline-purple-edit-action-item:hover {
+  color: #996FD6;
+  background-color: #fff;
+  border-color: #fff;
+}
+
+.btn-outline-purple-edit-action-item:not(:disabled):not(.disabled):active, .btn-outline-purple-edit-action-item:not(:disabled):not(.disabled).active,
+.show > .btn-outline-purple-edit-action-item.dropdown-toggle {
+  color: #996FD6;
+  background-color: #fff;
+  border-color: #fff;
+}
+
+.btn-check {
+  top: 16px;
+  right: 16px;
+}
+
 .main-container {
   margin-top: 72px !important;
   margin-bottom: 56px !important;
@@ -81,6 +205,66 @@
 }
 
 .item-card {
-  padding: 2rem !important;
+  padding: 3rem !important;
 }
 
+.btn-outline-vote-item {
+  color: #fff;
+}
+
+.btn-outline-vote-item:hover {
+  color: #343a40;
+  background-color: #fff;
+  border-color: #fff;
+}
+
+.btn-outline-vote-item:not(:disabled):not(.disabled):active, .btn-outline-vote-item:not(:disabled):not(.disabled).active,
+.show > .btn-outline-vote-item.dropdown-toggle {
+  color: #343a40;
+  background-color: #fff;
+  border-color: #fff;
+}
+
+.btn-outline-dark-done {
+  color: #fff;
+}
+
+.btn-outline-dark-done:hover {
+  color: #343a40;
+  background-color: #fff;
+  border-color: #fff;
+}
+
+.btn-outline-dark-done:not(:disabled):not(.disabled):active, .btn-outline-dark-done:not(:disabled):not(.disabled).active,
+.show > .btn-outline-dark-done.dropdown-toggle {
+  color: #343a40;
+  background-color: #fff;
+  border-color: #fff;
+}
+
+.btn-outline-arrow-header {
+  color: #fff;
+}
+
+.btn-outline-arrow-header:hover {
+  color: #c0c0c0;
+  border-color: #fff;
+}
+
+.btn-outline-arrow-header:not(:disabled):not(.disabled):active, .btn-outline-arrow-header:not(:disabled):not(.disabled).active,
+.show > .btn-outline-arrow-header.dropdown-toggle {
+  color: #c0c0c0;
+  border-color: #fff;
+}
+
+.btn-outline-purple-download-pdf {
+  color: #fff;
+}
+
+.btn-outline-purple-download-pdf:hover {
+  color: #c0c0c0;
+}
+
+.retro-download{
+  padding-left: 56px;
+}

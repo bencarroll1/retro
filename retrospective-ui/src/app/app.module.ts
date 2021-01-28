@@ -7,10 +7,15 @@ import {AppComponent} from './app.component';
 import {RetrosListComponent} from './components/retros-list/retros-list.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RetrosComponent} from './components/retros/retros.component';
+import {RetroItemPipe} from './components/retros/retro-item.pipe';
+import {RetroPipe} from './components/retros-list/retro.pipe';
 import {ItemFormComponent} from './components/item-form/item-form.component';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {ActionItemFormComponent} from './components/action-item-form/action-item-form.component';
+import {RetroItemVotesPipe} from './components/retros/retro-item-votes.pipe';
+import {ArchivedRetrosComponent} from './components/archived-retros/archived-retros.component';
+import {RetroArchivedPipe} from './components/retros-list/retro-archived.pipe';
 
 @NgModule({
   declarations: [
@@ -18,8 +23,13 @@ import {ActionItemFormComponent} from './components/action-item-form/action-item
     AppComponent,
     RetrosListComponent,
     RetrosComponent,
+    RetroItemPipe,
+    RetroItemVotesPipe,
+    RetroPipe,
     ItemFormComponent,
-    ActionItemFormComponent
+    ActionItemFormComponent,
+    ArchivedRetrosComponent,
+    RetroArchivedPipe
   ],
   imports: [
     // declaring imports
