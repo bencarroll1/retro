@@ -1,5 +1,8 @@
 package com.retrospective.controllers;
 
+import com.retrospective.exceptions.ActionItemNotFoundException;
+import com.retrospective.exceptions.ItemNotFoundException;
+import com.retrospective.exceptions.RetrosNotFoundException;
 import com.retrospective.models.ActionItem;
 import com.retrospective.models.Item;
 import com.retrospective.models.Retro;
@@ -49,16 +52,36 @@ public class RetrosController {
 		}
 	}
 	
+	//DELETE method for removing a retrospective by ID
+	@DeleteMapping("/retros/{id}")
+	ResponseEntity deleteRetroById(@PathVariable Long id) {
+		retrosService.deleteRetroById(id);
+		return new ResponseEntity(HttpStatus.OK);
+	}
+	
+	//PUT method for updating a retrospective by ID
+	//with try catch and exception if the retrospective(ID) is not found
+	@PutMapping("/retros/{id}")
+	ResponseEntity<Retro> updateRetroById(@RequestBody Retro updatedRetro, @PathVariable Long id) {
+		try {
+			return new ResponseEntity<>(retrosService.updateRetroById(id, updatedRetro), HttpStatus.OK);
+		} catch (RetrosNotFoundException e) {
+			log.error("Retro not found exception", e);
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
+	
 	//GET method for displaying a retrospectives items by ID
 	@GetMapping("/retros/{id}/items")
 	ResponseEntity<List<Item>> getRetroItemsById(@PathVariable Long id) {
 		return new ResponseEntity<>(retrosService.getRetroItemsById(id), HttpStatus.OK);
 	}
 	
-	//GET method for displaying a retrospective action items by ID
-	@GetMapping("/retros/{id}/action-items")
-	ResponseEntity<List<ActionItem>> getRetroActionItemsById(@PathVariable Long id) {
-		return new ResponseEntity<>(retrosService.getRetroActionItemsById(id), HttpStatus.OK);
+	//DELETE method for removing a retrospectives item by ID
+	@DeleteMapping("/items/{itemId}")
+	ResponseEntity deleteRetroItemById(@PathVariable Long itemId) {
+		retrosService.deleteRetroItemById(itemId);
+		return new ResponseEntity(HttpStatus.OK);
 	}
 	
 	//POST method for creating a new item on a retrospective
@@ -73,6 +96,24 @@ public class RetrosController {
 		}
 	}
 	
+	//PUT method for updating a retrospectives item by ID
+	//with try catch and exception if the item id(ID) is not found
+	@PutMapping("/items/{itemId}")
+	ResponseEntity<Item> updateRetroItemById(@RequestBody Item updatedItem, @PathVariable Long itemId) {
+		try {
+			return new ResponseEntity<>(retrosService.updateRetroItemById(itemId, updatedItem), HttpStatus.OK);
+		} catch (ItemNotFoundException e) {
+			log.error("Item not found exception", e);
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
+	
+	//GET method for displaying a retrospective action items by ID
+	@GetMapping("/retros/{id}/action-items")
+	ResponseEntity<List<ActionItem>> getRetroActionItemsById(@PathVariable Long id) {
+		return new ResponseEntity<>(retrosService.getRetroActionItemsById(id), HttpStatus.OK);
+	}
+	
 	//POST method for creating a new action item on a retrospective
 	//with try catch and exception if the retrospective cannot be found
 	@PostMapping("/retros/{id}/action-items")
@@ -81,6 +122,25 @@ public class RetrosController {
 			return new ResponseEntity<>(retrosService.addActionItemToRetro(id, actionItem), HttpStatus.OK);
 		} catch (Exception ex) {
 			log.error("Retro not found " + id, ex);
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
+	
+	//DELETE method for removing a retrospectives action item by ID
+	@DeleteMapping("/action-items/{actionItemId}")
+	ResponseEntity deleteRetroActionItemById(@PathVariable Long actionItemId) {
+		retrosService.deleteRetroActionItemById(actionItemId);
+		return new ResponseEntity(HttpStatus.OK);
+	}
+	
+	//PUT method for updating a retrospectives action item by ID
+	//with try catch and exception if the action item id(ID) is not found
+	@PutMapping("/action-items/{actionItemId}")
+	ResponseEntity<ActionItem> updateRetroActionItemById(@RequestBody ActionItem updatedActionItem, @PathVariable Long actionItemId) {
+		try {
+			return new ResponseEntity<>(retrosService.updateRetroActionItemById(actionItemId, updatedActionItem), HttpStatus.OK);
+		} catch (ActionItemNotFoundException e) {
+			log.error("Action item not found exception", e);
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
