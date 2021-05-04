@@ -5,6 +5,9 @@
 .ng-invalid:not(form) {
   border-left: 5px solid #a94442; /* red */
 }
+input{
+  font-size: 14pt;
+}
 
 .retro-app {
   margin-top: 5%;
@@ -36,7 +39,13 @@
 }
 
 .page-header {
-  padding-top: 60px;
+  padding-top: 5rem;
+  padding-bottom: 10px;
+  text-align: center;
+  vertical-align: middle;
+}
+.retro-details{
+  font-size: 14pt;
 }
 
 .home-page-nav {

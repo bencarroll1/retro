@@ -1,18 +1,20 @@
 <div class="container-fluid">
   <nav class="navbar fixed-top navbar-dark bg-dark">
     <div class="navbar-brand mb-0 h1">
-      <a [routerLink]="['../']">
+      <a [routerLink]="['../']" class="navbar-back-arrow">
         <fa-icon [icon]="faArrowLeft" class="btn-outline-arrow-header"></fa-icon>
       </a>
       {{retroName}}
     </div>
   </nav>
-  <div class="container-fluid main-container">
 
+  <div class="container-fluid main-container">
     <div class="row top-row">
 
+      <!-- GOOD ITEMS -->
       <div class="col-4">
         <h3 class="text-center p-3">
+          Things that went well <br><br>
           <fa-icon [icon]="faSmile" alt="Good items:"></fa-icon>
         </h3>
         <div class=" text-center p-3">
@@ -30,7 +32,7 @@
               <fa-icon [icon]="faArrowDown"></fa-icon>
             </button>
             <div class="card-body">
-              <a>{{item.description}}</a>
+              <a class="item-details">{{item.description}}</a>
               <button (click)="itemIsDone(item)" class="btn btn-outline-dark-done btn-check item-done">
                 <fa-icon [icon]="faCheck"></fa-icon>
               </button>
@@ -47,8 +49,10 @@
         </table>
       </div>
 
+      <!-- QUESTION ITEMS -->
       <div class="col-4">
         <h3 class="text-center p-3">
+          Questions about the sprint <br><br>
           <fa-icon [icon]="faQuestion"></fa-icon>
         </h3>
         <div class="text-center p-3">
@@ -66,7 +70,7 @@
               <fa-icon [icon]="faArrowDown"></fa-icon>
             </button>
             <div class="card-body">
-              <a>{{item.description}}</a>
+              <a class="item-details">{{item.description}}</a>
               <button (click)="itemIsDone(item)" class="btn btn-outline-dark-done btn-check item-done">
                 <fa-icon [icon]="faCheck"></fa-icon>
               </button>
@@ -82,8 +86,10 @@
         </div>
       </div>
 
+      <!-- BAD ITEMS -->
       <div class="col-4">
         <h3 class="text-center p-3">
+          Things that could be improved <br><br>
           <fa-icon [icon]="faFrown"></fa-icon>
         </h3>
         <div class="text-center p-3">
@@ -101,7 +107,7 @@
               <fa-icon [icon]="faArrowDown"></fa-icon>
             </button>
             <div class="card-body">
-              <a>{{item.description}}</a>
+              <a class="item-details">{{item.description}}</a>
               <button (click)="itemIsDone(item)" class="btn btn-outline-dark-done btn-check item-done">
                 <fa-icon [icon]="faCheck"></fa-icon>
               </button>
@@ -118,6 +124,7 @@
       </div>
     </div>
 
+    <!-- ACTION ITEMS -->
     <div class="row bottom-row" id="bottom-row">
       <div class="col-12">
         <h2 class="text-center" id="action-item-title">Action Items</h2>
@@ -127,7 +134,7 @@
             <div *ngFor="let actionItem of actionItems" class="col">
               <div class="card bg-action-item">
                 <div class="card-body">
-                  <a>{{actionItem.description}}</a>
+                  <a class="item-details">{{actionItem.description}}</a>
                   <button (click)="openActionItem(confirmActionModal, actionItem.id)"
                           class="btn btn-outline-red-trash-action-item">
                     <fa-icon [icon]="faTrash"></fa-icon>

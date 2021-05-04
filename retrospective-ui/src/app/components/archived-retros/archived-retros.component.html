@@ -15,7 +15,7 @@
     <div class="row">
       <div class="col-8">
       </div>
-      <div class="col-4">
+      <div class="col-4 search">
         <div class="input-group">
           <div class="input-group-prepend">
             <span class="input-group-text"><fa-icon [icon]="faSearch"></fa-icon></span>
@@ -32,9 +32,9 @@
           <tbody>
           <tr *ngFor="let retro of retros | retroArchiveFilter: true">
             <a [routerLink]="['/retros', retro.id]" style="color: black">
-              <td><strong>{{retro.name}}</strong></td>
+              <td class="archived-retro-details"><strong>{{retro.name}}</strong></td>
             </a>
-            <td>{{retro.created | date: 'dd/MM/yyyy HH:mm:ss'}}</td>
+            <td class="archived-retro-details">{{retro.created | date: 'dd/MM/yyyy HH:mm:ss'}}</td>
             <td class="text-right">
               <div class="btn-group btn-group-sm">
                 <a [routerLink]="['/retros', retro.id]" class="btn bg-enter">

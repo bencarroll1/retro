@@ -42,4 +42,12 @@
 .bg-enter {
   background-color: #bddba8;
 }
-
+input{
+  font-size: 14pt;
+}
+.archived-retro-details{
+  font-size: 14pt;
+}
+.search{
+  padding-top: 2rem;
+}

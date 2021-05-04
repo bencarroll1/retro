@@ -1,5 +1,5 @@
 .card {
-  float: left;
+  /*float: left;*/
   margin: .5%;
   width: 100%;
 }
@@ -38,15 +38,18 @@
 
 
 .bg-good {
-  background-color: #77DD77;
+  /*background-color: #77DD77;*/
+  background-color: #17A589;
 }
 
 .bg-bad {
-  background-color: #F78888;
+  /*background-color: #F78888;*/
+  background-color: #17A589;
 }
 
 .bg-question {
-  background-color: #F3D250;
+  /*background-color: #F3D250;*/
+  background-color: #17A589;
 }
 
 .bg-action-item {
@@ -141,6 +144,7 @@
   top: 70px;
   left: 36px;
   color: white;
+  font-size: 14pt;
 }
 
 .btn-outline-purple-edit-item {
@@ -265,6 +269,18 @@
   color: #c0c0c0;
 }
 
-.retro-download{
+.retro-download {
   padding-left: 56px;
+}
+
+.item-details {
+  font-size: 14pt;
+}
+
+#htmlDataGoodItems {
+  width: 100%;
+}
+
+.navbar-back-arrow {
+padding-right: 1rem;
 }

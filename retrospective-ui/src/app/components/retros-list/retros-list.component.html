@@ -13,7 +13,7 @@
   </nav>
   <form #retroForm="ngForm" (ngSubmit)="onSubmit(); retroForm.reset()">
     <div class="form-group">
-      <h3 class="page-header" for="retroNameInput">Create a new retrospective</h3>
+      <h2 class="page-header" for="retroNameInput">Create a Retrospective:</h2>
       <div class="input-group">
         <input [(ngModel)]="retroName" class="form-control form-rounded" id="retroNameInput" name="retroName"
                placeholder="Enter a retro name"
@@ -50,9 +50,9 @@
           <tbody>
           <tr *ngFor="let retro of retros | retroFilter: retroNameFilter | retroArchiveFilter: false">
             <a [routerLink]="['/retros', retro.id]" style="color: black">
-              <td><strong>{{retro.name}}</strong></td>
+              <td class="retro-details"><strong>{{retro.name}}</strong></td>
             </a>
-            <td>{{retro.created | date: 'dd/MM/yyyy HH:mm:ss'}}</td>
+            <td class="retro-details">{{retro.created | date: 'dd/MM/yyyy HH:mm:ss'}}</td>
             <td class="text-right">
               <div class="btn-group btn-group-sm">
                 <a [routerLink]="['/retros', retro.id]" class="btn bg-enter">
