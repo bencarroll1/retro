@@ -282,5 +282,9 @@
 }
 
 .navbar-back-arrow {
-padding-right: 1rem;
+  padding-right: 1rem;
+}
+
+.archive-nav {
+  padding-right: 56px;
 }

@@ -5,7 +5,8 @@
 .ng-invalid:not(form) {
   border-left: 5px solid #a94442; /* red */
 }
-input{
+
+input {
   font-size: 14pt;
 }
 
@@ -44,7 +45,8 @@ input{
   text-align: center;
   vertical-align: middle;
 }
-.retro-details{
+
+.retro-details {
   font-size: 14pt;
 }
 
@@ -57,10 +59,22 @@ input{
   color: white;
 }
 
+.logo-home-page-nav {
+  padding-right: 56px;
+}
+
+
 .nav-title {
   padding: 12px;
 }
 
 .bg-enter {
   background-color: #bddba8;
+}
+
+.logo-responsive {
+  height: auto;
+  width: auto;
+  max-height: 35px;
+  max-width: 100px;
 }

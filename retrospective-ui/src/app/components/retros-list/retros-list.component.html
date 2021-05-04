@@ -1,6 +1,9 @@
 <div class="container">
   <nav class="navbar fixed-top navbar-dark bg-dark">
     <div class="navbar-brand mb-0 h1">
+      <a [routerLink]="['../']" class="logo-home-page-nav">
+        <img src="../../../assets/logo.png" class="logo-responsive" alt="Retro Logo">
+      </a>
       <a [routerLink]="['../']" class="home-page-nav">
         <fa-icon [icon]="faHome" class="btn-outline-arrow-header"></fa-icon>
         <a class="nav-title">Home Page</a>
@@ -16,7 +19,7 @@
       <h2 class="page-header" for="retroNameInput">Create a Retrospective:</h2>
       <div class="input-group">
         <input [(ngModel)]="retroName" class="form-control form-rounded" id="retroNameInput" name="retroName"
-               placeholder="Enter a retro name"
+               placeholder="Enter a Retrospective Title"
                required/>
         <div class="input-group-append">
           <button [disabled]="!retroForm.valid" class="btn btn-success" type="submit">
