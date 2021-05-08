@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 @Slf4j
@@ -75,6 +76,11 @@ public class RetrosController {
 	@GetMapping("/retros/{id}/items")
 	ResponseEntity<List<Item>> getRetroItemsById(@PathVariable Long id) {
 		return new ResponseEntity<>(retrosService.getRetroItemsById(id), HttpStatus.OK);
+	}
+	
+	@GetMapping("/retros/{id}/items/sentiment-analysis")
+	ResponseEntity<List<Item>> getRetroItemsByIdSentimentAnalysis(@PathVariable Long id) throws IOException {
+		return new ResponseEntity<>(retrosService.getRetroItemsByIdSentimentAnalysis(id), HttpStatus.OK);
 	}
 	
 	//DELETE method for removing a retrospectives item by ID

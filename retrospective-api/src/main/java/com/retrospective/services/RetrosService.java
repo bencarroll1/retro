@@ -13,8 +13,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import java.util.List;
-import java.util.Optional;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.*;
 
 //service annotation
 //service layer stores business logic
@@ -48,7 +50,7 @@ public class RetrosService {
 	}
 	
 	// method to delete a retrospective by Id
-	public void deleteRetroById(Long id){
+	public void deleteRetroById(Long id) {
 		retrosRepository.deleteById(id);
 	}
 	
@@ -108,6 +110,7 @@ public class RetrosService {
 		}
 		return itemsRepository.save(updatedItem);
 	}
+	
 	// method to update a retros action items contents by id
 	public ActionItem updateRetroActionItemById(@PathVariable Long actionItemId, @RequestBody ActionItem updatedActionItem) throws ActionItemNotFoundException {
 		Optional<ActionItem> currentActionItem = actionItemsRepository.findById(actionItemId);
@@ -117,5 +120,57 @@ public class RetrosService {
 			throw new ActionItemNotFoundException();
 		}
 		return actionItemsRepository.save(updatedActionItem);
+	}
+	
+	public List<Item> getRetroItemsByIdSentimentAnalysis(Long id) throws IOException {
+		String retrospectiveItem;
+		
+		ArrayList<String> stopWords = new ArrayList<>();
+		BufferedReader stop = new BufferedReader(new FileReader("src/main/resources/Dictionaries/stopWords.txt"));
+		String line;
+		while ((line = stop.readLine()) != null) {
+			stopWords.add(line);
+		}
+		
+		Map<String, String> map = new HashMap<>();
+		BufferedReader in = new BufferedReader(new FileReader("src/main/resources/Dictionaries/AFINN-en-165.txt"));
+		
+		while ((line = in.readLine()) != null) {
+			String[] parts = line.split("\t");
+			map.put(parts[0], parts[1]);
+		}
+		in.close();
+		
+		List<Item> retroItems = itemsRepository.findAllByRetroId(id);
+		String retroItemDescriptionWords = retroItems.toString().replaceAll("[^a-zA-Z]", " ");
+		String trimmedRetroItemDescriptionWords = retroItemDescriptionWords.trim();
+		if (trimmedRetroItemDescriptionWords.contains("Item")) {
+			trimmedRetroItemDescriptionWords.replace("Item", "");
+		}
+//		List<String> retroItemDescriptionWords = new ArrayList<>();
+//		//string tokenizer, split by commas? or =?
+//		String[] tokens = trimmed.split(" ");
+//		retroItemDescriptionWords.add(Arrays.toString(tokens));
+//		retroItemDescriptionWords.removeIf(word -> word.equals(" "));
+		
+		float retrospectiveItemScore = 0;
+		retrospectiveItem = trimmedRetroItemDescriptionWords;
+		String[] word = retrospectiveItem.split(" ");
+		
+		for (int i = 0; i < word.length; i++) {
+			if (stopWords.contains(word[i].toLowerCase())) {
+			
+			} else {
+				if (map.get(word[i]) != null) {
+					String wordScore = map.get(word[i].toLowerCase());
+					retrospectiveItemScore = retrospectiveItemScore + Integer.parseInt(wordScore);
+				}
+			}
+		}
+		Map<String, Float> sentiment = new HashMap<>();
+		sentiment.put(retrospectiveItem, retrospectiveItemScore);
+		System.out.println(sentiment);
+		
+		return itemsRepository.findAllByRetroId(id);
 	}
 }
