@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LoadDatabase.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Retrospective App</a> &gt; <a href="index.source.html" class="el_package">com.retrospective.configs</a> &gt; <span class="el_source">LoadDatabase.java</span></div><h1>LoadDatabase.java</h1><pre class="source lang-java linenums">package com.retrospective.configs;
+
+import com.retrospective.models.ActionItem;
+import com.retrospective.models.Item;
+import com.retrospective.models.Retro;
+import com.retrospective.repositories.ActionItemsRepository;
+import com.retrospective.repositories.ItemsRepository;
+import com.retrospective.repositories.RetrosRepository;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.retrospective.models.ItemType.*;
+
+@Configuration
+<span class="nc" id="L21">@Slf4j</span>
+//setting profile to be local so when the API is ran with this
+//profile selected, it will load this data
+@Profile(&quot;local&quot;)
+<span class="nc" id="L25">public class LoadDatabase {</span>
+	
+	@Bean
+	public CommandLineRunner initDatabase(RetrosRepository retrosRepository, ItemsRepository itemsRepository, ActionItemsRepository actionItemsRepository) {
+<span class="nc" id="L29">		return args -&gt; {</span>
+<span class="nc" id="L30">			log.info(&quot;Beginning preload of data&quot;);</span>
+			
+			//creating data for first sample retrospective
+<span class="nc" id="L33">			Retro retro1 = retrosRepository.save(new Retro(&quot;Software Development Team Retrospective&quot;, false));</span>
+			
+			//adding items
+<span class="nc" id="L36">			List&lt;Item&gt; itemsForRetro1 = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L37">			itemsForRetro1.add(new Item(&quot;Excellent communication with team. Happy with how this sprint went&quot;, GOOD, false, 0, retro1));</span>
+<span class="nc" id="L38">			itemsForRetro1.add(new Item(&quot;Frustrated that I was blocked by database problem. Could not do my work&quot;, BAD, false, 2, retro1));</span>
+<span class="nc" id="L39">			itemsForRetro1.add(new Item(&quot;How can we solve the database issue?&quot;, QUESTION, false, -1, retro1));</span>
+<span class="nc" id="L40">			itemsRepository.saveAll(itemsForRetro1);</span>
+			
+			//adding action items
+<span class="nc" id="L43">			List&lt;ActionItem&gt; actionItemsForRetro1 = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L44">			actionItemsForRetro1.add(new ActionItem(&quot;Retro 1 - Action Item Number 1&quot;, retro1));</span>
+<span class="nc" id="L45">			actionItemsForRetro1.add(new ActionItem(&quot;Retro 1 - Action Item Number 2&quot;, retro1));</span>
+<span class="nc" id="L46">			actionItemsForRetro1.add(new ActionItem(&quot;Retro 1 - Action Item Number 3&quot;, retro1));</span>
+<span class="nc" id="L47">			actionItemsRepository.saveAll(actionItemsForRetro1);</span>
+			
+			//creating data for second sample retrospective
+<span class="nc" id="L50">			Retro retro2 = retrosRepository.save(new Retro(&quot;Devops Team Retrospective&quot;, true));</span>
+			
+<span class="nc" id="L52">			List&lt;Item&gt; itemsForRetro2 = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L53">			itemsForRetro2.add(new Item(&quot;Hated the amount of meetings we had this sprint. Little time for actual development&quot;, BAD, false, -4, retro2));</span>
+<span class="nc" id="L54">			itemsForRetro2.add(new Item(&quot;Can we try to limit the number of meetings we have in a week?&quot;, QUESTION, false, -1, retro2));</span>
+<span class="nc" id="L55">			itemsForRetro2.add(new Item(&quot;Thorough discussion on design of our new product. Excited as this will give us the ability to quickly proceed with development&quot;, GOOD, false, 3, retro2));</span>
+<span class="nc" id="L56">			itemsRepository.saveAll(itemsForRetro2);</span>
+			
+<span class="nc" id="L58">			List&lt;ActionItem&gt; actionItemsForRetro2 = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L59">			actionItemsForRetro2.add(new ActionItem(&quot;Retro 2 - Action Item Number 1&quot;, retro2));</span>
+<span class="nc" id="L60">			actionItemsForRetro2.add(new ActionItem(&quot;Retro 2 - Action Item Number 2&quot;, retro2));</span>
+<span class="nc" id="L61">			actionItemsForRetro2.add(new ActionItem(&quot;Retro 2 - Action Item Number 3&quot;, retro2));</span>
+<span class="nc" id="L62">			actionItemsRepository.saveAll(actionItemsForRetro2);</span>
+			
+<span class="nc" id="L64">			log.info(&quot;Finished preload of data&quot;);</span>
+<span class="nc" id="L65">		};</span>
+	}
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

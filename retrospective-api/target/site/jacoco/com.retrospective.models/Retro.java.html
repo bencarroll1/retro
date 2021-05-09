@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Retro.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Retrospective App</a> &gt; <a href="index.source.html" class="el_package">com.retrospective.models</a> &gt; <span class="el_source">Retro.java</span></div><h1>Retro.java</h1><pre class="source lang-java linenums">package com.retrospective.models;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+//adding  data annotation which removes the need for getter/setter, toString etc boilerplate code
+<span class="pc" id="L13">@Data</span>
+<span class="pc bpc" id="L14" title="12 of 20 branches missed.">@EqualsAndHashCode(callSuper = true)</span>
+//no args constructor removes the need to add a constructor with no arguments
+//and similar for all args constructor
+<span class="fc" id="L17">@NoArgsConstructor</span>
+<span class="fc" id="L18">@AllArgsConstructor</span>
+@Entity
+//mapping retros to custom SQL table using JPA
+@Table(name = &quot;retros&quot;)
+//class inherits characteristics from BaseEntity
+public class Retro extends BaseEntity {
+	//setting columns in actionItems table
+	@Column(name = &quot;name&quot;, nullable = false)
+<span class="fc" id="L26">	private String name;</span>
+	
+	@Column(name = &quot;archive_retro_flag&quot;, nullable = false)
+<span class="fc" id="L29">	private boolean archiveRetroFlag;</span>
+}
+
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

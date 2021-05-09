@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RetrosService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Retrospective App</a> &gt; <a href="index.source.html" class="el_package">com.retrospective.services</a> &gt; <span class="el_source">RetrosService.java</span></div><h1>RetrosService.java</h1><pre class="source lang-java linenums">package com.retrospective.services;
+
+import com.retrospective.exceptions.ActionItemNotFoundException;
+import com.retrospective.exceptions.ItemNotFoundException;
+import com.retrospective.exceptions.RetrosNotFoundException;
+import com.retrospective.models.ActionItem;
+import com.retrospective.models.Item;
+import com.retrospective.models.Retro;
+import com.retrospective.repositories.ActionItemsRepository;
+import com.retrospective.repositories.ItemsRepository;
+import com.retrospective.repositories.RetrosRepository;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.*;
+
+//service annotation
+//service layer stores business logic
+@Service
+public class RetrosService {
+	//creating an instance of each repo
+	private final RetrosRepository retrosRepository;
+	private final ItemsRepository itemsRepository;
+	private final ActionItemsRepository actionItemsRepository;
+	
+<span class="fc" id="L30">	RetrosService(RetrosRepository retrosRepository, ItemsRepository itemsRepository, ActionItemsRepository actionItemsRepository) {</span>
+<span class="fc" id="L31">		this.retrosRepository = retrosRepository;</span>
+<span class="fc" id="L32">		this.itemsRepository = itemsRepository;</span>
+<span class="fc" id="L33">		this.actionItemsRepository = actionItemsRepository;</span>
+<span class="fc" id="L34">	}</span>
+	
+	//method to get all retrospectives from retros repo. method called by controller
+	public List&lt;Retro&gt; getAllRetros() {
+<span class="fc" id="L38">		return retrosRepository.findAll();</span>
+	}
+	
+	//method to add a retrospective to retros repo. method called by controller
+	public Retro addRetro(Retro retro) {
+<span class="fc" id="L43">		return retrosRepository.save(retro);</span>
+	}
+	
+	//method to get a retrospective by ID from retros repo. method called by controller
+	public Retro getRetroById(Long id) throws RetrosNotFoundException {
+<span class="fc" id="L48">		return retrosRepository.findById(id)</span>
+<span class="fc" id="L49">				.orElseThrow(RetrosNotFoundException::new);</span>
+	}
+	
+	// method to delete a retrospective by Id
+	public void deleteRetroById(Long id) {
+<span class="nc" id="L54">		retrosRepository.deleteById(id);</span>
+<span class="nc" id="L55">	}</span>
+	
+	// method to update the contents of a retrospective by ID
+	public Retro updateRetroById(@PathVariable Long id, @RequestBody Retro updatedRetro) throws RetrosNotFoundException {
+<span class="nc" id="L59">		Optional&lt;Retro&gt; currentRetro = retrosRepository.findById(id);</span>
+<span class="nc bnc" id="L60" title="All 2 branches missed.">		if (currentRetro.isPresent()) {</span>
+			
+<span class="nc" id="L62">			updatedRetro.setId(currentRetro.get().getId());</span>
+		} else {
+<span class="nc" id="L64">			throw new RetrosNotFoundException();</span>
+		}
+<span class="nc" id="L66">		return retrosRepository.save(updatedRetro);</span>
+	}
+	
+	//method to get a retrospectives items from items repo. method called by controller
+	public List&lt;Item&gt; getRetroItemsById(Long id) {
+<span class="fc" id="L71">		return itemsRepository.findAllByRetroId(id);</span>
+	}
+	
+	// method to delete a retro item by id
+	public void deleteRetroItemById(Long itemId) {
+<span class="nc" id="L76">		itemsRepository.deleteById(itemId);</span>
+<span class="nc" id="L77">	}</span>
+	
+	//method to get a retrospectives action items from action items repo. method called by controller
+	public List&lt;ActionItem&gt; getRetroActionItemsById(Long id) {
+<span class="fc" id="L81">		return actionItemsRepository.findAllByRetroId(id);</span>
+	}
+	
+	// method to delete a retro action item by id
+	public void deleteRetroActionItemById(Long actionItemId) {
+<span class="nc" id="L86">		actionItemsRepository.deleteById(actionItemId);</span>
+<span class="nc" id="L87">	}</span>
+	
+	//method to add a retrospective item to items repo. method called by controller
+	public Item addItemToRetro(Long id, Item item) throws RetrosNotFoundException {
+<span class="fc" id="L91">		Retro retro = getRetroById(id);</span>
+<span class="fc" id="L92">		item.setRetro(retro);</span>
+<span class="fc" id="L93">		return itemsRepository.save(item);</span>
+	}
+	
+	//method to add a retrospective action item to items repo. method called by controller
+	public ActionItem addActionItemToRetro(Long id, ActionItem actionItem) throws RetrosNotFoundException {
+<span class="fc" id="L98">		Retro retro = getRetroById(id);</span>
+<span class="fc" id="L99">		actionItem.setRetro(retro);</span>
+<span class="fc" id="L100">		return actionItemsRepository.save(actionItem);</span>
+	}
+	
+	// method to update a retros items contents by id
+	public Item updateRetroItemById(@PathVariable Long itemId, @RequestBody Item updatedItem) throws ItemNotFoundException {
+<span class="nc" id="L105">		Optional&lt;Item&gt; currentItem = itemsRepository.findById(itemId);</span>
+<span class="nc bnc" id="L106" title="All 2 branches missed.">		if (currentItem.isPresent()) {</span>
+<span class="nc" id="L107">			updatedItem.setRetro(currentItem.get().getRetro());</span>
+		} else {
+<span class="nc" id="L109">			throw new ItemNotFoundException();</span>
+		}
+<span class="nc" id="L111">		return itemsRepository.save(updatedItem);</span>
+	}
+	
+	// method to update a retros action items contents by id
+	public ActionItem updateRetroActionItemById(@PathVariable Long actionItemId, @RequestBody ActionItem updatedActionItem) throws ActionItemNotFoundException {
+<span class="nc" id="L116">		Optional&lt;ActionItem&gt; currentActionItem = actionItemsRepository.findById(actionItemId);</span>
+<span class="nc bnc" id="L117" title="All 2 branches missed.">		if (currentActionItem.isPresent()) {</span>
+<span class="nc" id="L118">			updatedActionItem.setRetro(currentActionItem.get().getRetro());</span>
+		} else {
+<span class="nc" id="L120">			throw new ActionItemNotFoundException();</span>
+		}
+<span class="nc" id="L122">		return actionItemsRepository.save(updatedActionItem);</span>
+	}
+	
+	public String getRetroItemsByIdSentimentAnalysis(Long id) throws IOException {
+		String retrospectiveItem;
+		
+<span class="nc" id="L128">		ArrayList&lt;String&gt; stopWords = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L129">		BufferedReader stop = new BufferedReader(new FileReader(&quot;src/main/resources/Dictionaries/stopWords.txt&quot;));</span>
+		String line;
+<span class="nc bnc" id="L131" title="All 2 branches missed.">		while ((line = stop.readLine()) != null) {</span>
+<span class="nc" id="L132">			stopWords.add(line);</span>
+		}
+		
+<span class="nc" id="L135">		Map&lt;String, String&gt; map = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L136">		BufferedReader in = new BufferedReader(new FileReader(&quot;src/main/resources/Dictionaries/AFINN-en-165.txt&quot;));</span>
+		
+<span class="nc bnc" id="L138" title="All 2 branches missed.">		while ((line = in.readLine()) != null) {</span>
+<span class="nc" id="L139">			String[] parts = line.split(&quot;\t&quot;);</span>
+<span class="nc" id="L140">			map.put(parts[0], parts[1]);</span>
+<span class="nc" id="L141">		}</span>
+<span class="nc" id="L142">		in.close();</span>
+		
+<span class="nc" id="L144">		List&lt;Item&gt; retroItems = itemsRepository.findAllByRetroId(id);</span>
+<span class="nc" id="L145">		String retroItemDescriptionWords = retroItems.toString().replaceAll(&quot;[^a-zA-Z]&quot;, &quot; &quot;);</span>
+<span class="nc" id="L146">		String trimmedRetroItemDescriptionWords = retroItemDescriptionWords.trim();</span>
+<span class="nc bnc" id="L147" title="All 2 branches missed.">		if (trimmedRetroItemDescriptionWords.contains(&quot;Item&quot;)) {</span>
+<span class="nc" id="L148">			trimmedRetroItemDescriptionWords.replace(&quot;Item&quot;, &quot;&quot;);</span>
+		}
+//		List&lt;String&gt; retroItemDescriptionWords = new ArrayList&lt;&gt;();
+//		//string tokenizer, split by commas? or =?
+//		String[] tokens = trimmed.split(&quot; &quot;);
+//		retroItemDescriptionWords.add(Arrays.toString(tokens));
+//		retroItemDescriptionWords.removeIf(word -&gt; word.equals(&quot; &quot;));
+		
+<span class="nc" id="L156">		float retrospectiveItemScore = 0;</span>
+<span class="nc" id="L157">		retrospectiveItem = trimmedRetroItemDescriptionWords;</span>
+<span class="nc" id="L158">		String[] word = retrospectiveItem.split(&quot; &quot;);</span>
+		
+<span class="nc bnc" id="L160" title="All 2 branches missed.">		for (int i = 0; i &lt; word.length; i++) {</span>
+<span class="nc bnc" id="L161" title="All 2 branches missed.">			if (stopWords.contains(word[i].toLowerCase())) {</span>
+			
+			} else {
+<span class="nc bnc" id="L164" title="All 2 branches missed.">				if (map.get(word[i]) != null) {</span>
+<span class="nc" id="L165">					String wordScore = map.get(word[i].toLowerCase());</span>
+<span class="nc" id="L166">					retrospectiveItemScore = retrospectiveItemScore + Integer.parseInt(wordScore);</span>
+				}
+			}
+		}
+//		Map&lt;String, Float&gt; sentiment = new HashMap&lt;&gt;();
+//		sentiment.put(retrospectiveItem, retrospectiveItemScore);
+<span class="nc" id="L172">		String sentiment = &quot;Retrospective Score: &quot; + retrospectiveItemScore;</span>
+<span class="nc" id="L173">		System.out.println(sentiment);</span>
+		
+<span class="nc" id="L175">		return sentiment; //itemsRepository.findAllByRetroId(id);</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

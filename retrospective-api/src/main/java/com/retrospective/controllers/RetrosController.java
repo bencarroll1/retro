@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
@@ -149,6 +150,18 @@ public class RetrosController {
 			log.error("Action item not found exception", e);
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
+	}
+	
+	@GetMapping("/retros/{id}/export-items")
+	ResponseEntity<List<Item>> getRetroAndExportItemsToCSV(@PathVariable Long id, HttpServletResponse response) throws RetrosNotFoundException, IOException {
+		System.out.println("Exporting items to CSV");
+		return new ResponseEntity<>(retrosService.getRetroItemsAndExportToCSV(id, response), HttpStatus.OK);
+	}
+	
+	@GetMapping("/retros/{id}/export-actionItems")
+	ResponseEntity<List<ActionItem>> getRetroAndExportActionItemsToCSV(@PathVariable Long id, HttpServletResponse response) throws RetrosNotFoundException, IOException {
+		System.out.println("Exporting action items to CSV");
+		return new ResponseEntity<>(retrosService.getRetroActionItemsAndExportToCSV(id, response), HttpStatus.OK);
 	}
 	
 }

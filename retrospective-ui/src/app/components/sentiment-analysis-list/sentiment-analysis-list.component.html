@@ -23,14 +23,14 @@
     <div class="input-group-prepend">
       <span class="input-group-text"><fa-icon [icon]="faSearch"></fa-icon></span>
     </div>
-    <input [(ngModel)]="retroNameFilter" class="form-control" placeholder="Search" type="text"/>
+    <input [(ngModel)]="sentimentAnalysisListRetroFilter" class="form-control" placeholder="Search" type="text"/>
   </div>
   <div class="row">
     <div class="clearfix">&nbsp;</div>
     <div class="col-12">
       <table class="table table-striped table-borderless">
         <tbody>
-        <tr *ngFor="let retro of retros | retroFilter: retroNameFilter">
+        <tr *ngFor="let retro of retros | retroFilter: sentimentAnalysisListRetroFilter">
           <a [routerLink]="['/retros/' + retro.id + '/sentiment-analysis']" style="color: black">
             <td class="retro-details"><strong>{{retro.name}}</strong></td>
           </a>

@@ -18,6 +18,7 @@ import {ArchivedRetrosComponent} from './components/archived-retros/archived-ret
 import {RetroArchivedPipe} from './components/retros-list/retro-archived.pipe';
 import {SentimentAnalysisComponent} from './components/sentiment-analysis/sentiment-analysis.component';
 import { SentimentAnalysisListComponent } from './components/sentiment-analysis-list/sentiment-analysis-list.component';
+import { SentimentAnalysisListPipe } from './components/sentiment-analysis-list/sentiment-analysis-list.pipe';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { SentimentAnalysisListComponent } from './components/sentiment-analysis-
     ArchivedRetrosComponent,
     RetroArchivedPipe,
     SentimentAnalysisComponent,
-    SentimentAnalysisListComponent
+    SentimentAnalysisListComponent,
+    SentimentAnalysisListPipe
   ],
   imports: [
     // declaring imports

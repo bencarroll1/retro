@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RetrosController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Retrospective App</a> &gt; <a href="index.source.html" class="el_package">com.retrospective.controllers</a> &gt; <span class="el_source">RetrosController.java</span></div><h1>RetrosController.java</h1><pre class="source lang-java linenums">package com.retrospective.controllers;
+
+import com.retrospective.exceptions.ActionItemNotFoundException;
+import com.retrospective.exceptions.ItemNotFoundException;
+import com.retrospective.exceptions.RetrosNotFoundException;
+import com.retrospective.models.ActionItem;
+import com.retrospective.models.Item;
+import com.retrospective.models.Retro;
+import com.retrospective.services.RetrosService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
+import java.util.List;
+
+<span class="fc" id="L18">@Slf4j</span>
+//using Spring annotations to take care of boilerplate code and assign this class as an API controller
+@RestController
+//setting base endpoint for API endpoints
+@RequestMapping(value = &quot;/api&quot;)
+public class RetrosController {
+	
+	//creating instance of the retrosService
+	private final RetrosService retrosService;
+	
+<span class="fc" id="L28">	RetrosController(RetrosService retrosService) {</span>
+<span class="fc" id="L29">		this.retrosService = retrosService;</span>
+<span class="fc" id="L30">	}</span>
+	
+	//GET method for displaying all retrospectives
+	@GetMapping(&quot;/retros&quot;)
+	ResponseEntity&lt;List&lt;Retro&gt;&gt; getAllRetros() {
+<span class="fc" id="L35">		return new ResponseEntity&lt;&gt;(retrosService.getAllRetros(), HttpStatus.OK);</span>
+	}
+	
+	//POST method for creating a new retrospective
+	@PostMapping(&quot;/retros&quot;)
+	ResponseEntity&lt;Retro&gt; addNewRetro(@RequestBody Retro retro) {
+<span class="fc" id="L41">		return new ResponseEntity&lt;&gt;(retrosService.addRetro(retro), HttpStatus.CREATED);</span>
+	}
+	
+	//GET method for displaying a retrospective by ID
+	//with try catch and exception if the retrospective(ID) is not found
+	@GetMapping(&quot;/retros/{id}&quot;)
+	ResponseEntity&lt;Retro&gt; getRetroById(@PathVariable Long id) {
+		try {
+<span class="fc" id="L49">			return new ResponseEntity&lt;&gt;(retrosService.getRetroById(id), HttpStatus.OK);</span>
+<span class="nc" id="L50">		} catch (Exception ex) {</span>
+<span class="nc" id="L51">			log.error(&quot;Retro not found &quot; + id, ex);</span>
+<span class="nc" id="L52">			return new ResponseEntity&lt;&gt;(HttpStatus.NOT_FOUND);</span>
+		}
+	}
+	
+	//DELETE method for removing a retrospective by ID
+	@DeleteMapping(&quot;/retros/{id}&quot;)
+	ResponseEntity deleteRetroById(@PathVariable Long id) {
+<span class="nc" id="L59">		retrosService.deleteRetroById(id);</span>
+<span class="nc" id="L60">		return new ResponseEntity(HttpStatus.OK);</span>
+	}
+	
+	//PUT method for updating a retrospective by ID
+	//with try catch and exception if the retrospective(ID) is not found
+	@PutMapping(&quot;/retros/{id}&quot;)
+	ResponseEntity&lt;Retro&gt; updateRetroById(@RequestBody Retro updatedRetro, @PathVariable Long id) {
+		try {
+<span class="nc" id="L68">			return new ResponseEntity&lt;&gt;(retrosService.updateRetroById(id, updatedRetro), HttpStatus.OK);</span>
+<span class="nc" id="L69">		} catch (RetrosNotFoundException e) {</span>
+<span class="nc" id="L70">			log.error(&quot;Retro not found exception&quot;, e);</span>
+<span class="nc" id="L71">			return new ResponseEntity&lt;&gt;(HttpStatus.NOT_FOUND);</span>
+		}
+	}
+	
+	//GET method for displaying a retrospectives items by ID
+	@GetMapping(&quot;/retros/{id}/items&quot;)
+	ResponseEntity&lt;List&lt;Item&gt;&gt; getRetroItemsById(@PathVariable Long id) {
+<span class="fc" id="L78">		return new ResponseEntity&lt;&gt;(retrosService.getRetroItemsById(id), HttpStatus.OK);</span>
+	}
+	
+	@GetMapping(&quot;/retros/{id}/items/sentiment-analysis&quot;)
+	ResponseEntity&lt;String&gt; getRetroItemsByIdSentimentAnalysis(@PathVariable Long id) throws IOException {
+<span class="nc" id="L83">		return new ResponseEntity&lt;&gt;(retrosService.getRetroItemsByIdSentimentAnalysis(id), HttpStatus.OK);</span>
+	}
+	
+	//DELETE method for removing a retrospectives item by ID
+	@DeleteMapping(&quot;/items/{itemId}&quot;)
+	ResponseEntity deleteRetroItemById(@PathVariable Long itemId) {
+<span class="nc" id="L89">		retrosService.deleteRetroItemById(itemId);</span>
+<span class="nc" id="L90">		return new ResponseEntity(HttpStatus.OK);</span>
+	}
+	
+	//POST method for creating a new item on a retrospective
+	//with try catch and exception if the retrospective cannot be found
+	@PostMapping(&quot;/retros/{id}/items&quot;)
+	ResponseEntity&lt;Item&gt; addItemToRetro(@RequestBody Item item, @PathVariable Long id) {
+		try {
+<span class="fc" id="L98">			return new ResponseEntity&lt;&gt;(retrosService.addItemToRetro(id, item), HttpStatus.OK);</span>
+<span class="nc" id="L99">		} catch (Exception ex) {</span>
+<span class="nc" id="L100">			log.error(&quot;Retro not found &quot; + id, ex);</span>
+<span class="nc" id="L101">			return new ResponseEntity&lt;&gt;(HttpStatus.NOT_FOUND);</span>
+		}
+	}
+	
+	//PUT method for updating a retrospectives item by ID
+	//with try catch and exception if the item id(ID) is not found
+	@PutMapping(&quot;/items/{itemId}&quot;)
+	ResponseEntity&lt;Item&gt; updateRetroItemById(@RequestBody Item updatedItem, @PathVariable Long itemId) {
+		try {
+<span class="nc" id="L110">			return new ResponseEntity&lt;&gt;(retrosService.updateRetroItemById(itemId, updatedItem), HttpStatus.OK);</span>
+<span class="nc" id="L111">		} catch (ItemNotFoundException e) {</span>
+<span class="nc" id="L112">			log.error(&quot;Item not found exception&quot;, e);</span>
+<span class="nc" id="L113">			return new ResponseEntity&lt;&gt;(HttpStatus.NOT_FOUND);</span>
+		}
+	}
+	
+	//GET method for displaying a retrospective action items by ID
+	@GetMapping(&quot;/retros/{id}/action-items&quot;)
+	ResponseEntity&lt;List&lt;ActionItem&gt;&gt; getRetroActionItemsById(@PathVariable Long id) {
+<span class="fc" id="L120">		return new ResponseEntity&lt;&gt;(retrosService.getRetroActionItemsById(id), HttpStatus.OK);</span>
+	}
+	
+	//POST method for creating a new action item on a retrospective
+	//with try catch and exception if the retrospective cannot be found
+	@PostMapping(&quot;/retros/{id}/action-items&quot;)
+	ResponseEntity&lt;ActionItem&gt; addActionItemToRetro(@RequestBody ActionItem actionItem, @PathVariable Long id) {
+		try {
+<span class="fc" id="L128">			return new ResponseEntity&lt;&gt;(retrosService.addActionItemToRetro(id, actionItem), HttpStatus.OK);</span>
+<span class="nc" id="L129">		} catch (Exception ex) {</span>
+<span class="nc" id="L130">			log.error(&quot;Retro not found &quot; + id, ex);</span>
+<span class="nc" id="L131">			return new ResponseEntity&lt;&gt;(HttpStatus.NOT_FOUND);</span>
+		}
+	}
+	
+	//DELETE method for removing a retrospectives action item by ID
+	@DeleteMapping(&quot;/action-items/{actionItemId}&quot;)
+	ResponseEntity deleteRetroActionItemById(@PathVariable Long actionItemId) {
+<span class="nc" id="L138">		retrosService.deleteRetroActionItemById(actionItemId);</span>
+<span class="nc" id="L139">		return new ResponseEntity(HttpStatus.OK);</span>
+	}
+	
+	//PUT method for updating a retrospectives action item by ID
+	//with try catch and exception if the action item id(ID) is not found
+	@PutMapping(&quot;/action-items/{actionItemId}&quot;)
+	ResponseEntity&lt;ActionItem&gt; updateRetroActionItemById(@RequestBody ActionItem updatedActionItem, @PathVariable Long actionItemId) {
+		try {
+<span class="nc" id="L147">			return new ResponseEntity&lt;&gt;(retrosService.updateRetroActionItemById(actionItemId, updatedActionItem), HttpStatus.OK);</span>
+<span class="nc" id="L148">		} catch (ActionItemNotFoundException e) {</span>
+<span class="nc" id="L149">			log.error(&quot;Action item not found exception&quot;, e);</span>
+<span class="nc" id="L150">			return new ResponseEntity&lt;&gt;(HttpStatus.NOT_FOUND);</span>
+		}
+	}
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.retrospective.services.RetrosServiceTest
+-------------------------------------------------------------------------------
+Tests run: 13, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.836 s - in com.retrospective.services.RetrosServiceTest

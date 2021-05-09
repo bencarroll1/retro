@@ -55,6 +55,8 @@ export class RetrosComponent implements OnInit, OnDestroy {
   itemSubscription: Subscription;
   itemInterval;
 
+  dateTime = new Date();
+
   actionItemObservable: Observable<void>;
   actionItemSubscription: Subscription;
   actionItemInterval;
@@ -87,6 +89,8 @@ export class RetrosComponent implements OnInit, OnDestroy {
       this.actionItemInterval = setInterval(() => this.getRetroActionItems(), 5000);
     });
     this.actionItemSubscription = this.actionItemObservable.subscribe();
+
+    this.retroService.getRetroItemsByIdAndExportToCSV(this.id);
   }
 
   ngOnDestroy() {
@@ -101,6 +105,74 @@ export class RetrosComponent implements OnInit, OnDestroy {
     console.log('fetching retro items');
     this.retroService.getRetroItemsById(this.id).subscribe(response => {
       this.retroService.items = this.sortItems(response.body);
+    });
+  }
+
+  getRetroItemsAndExportToCSV() {
+    // get retros items and export to csv
+    console.log('exporting retro items');
+    this.retroService.getRetroItemsByIdAndExportToCSV(this.id).subscribe(response => {
+      // It is necessary to create a new blob object with mime-type explicitly set
+      // otherwise only Chrome works like it should
+      const newBlob = new Blob([response], {type: 'application/csv'});
+
+      // IE doesn't allow using a blob object directly as link href
+      // instead it is necessary to use msSaveOrOpenBlob
+      if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+        window.navigator.msSaveOrOpenBlob(newBlob);
+        return;
+      }
+
+      // For other browsers:
+      // Create a link pointing to the ObjectURL containing the blob.
+      const data = window.URL.createObjectURL(newBlob);
+
+      const link = document.createElement('a');
+      link.href = data;
+      link.download = 'Retrospective Items ' + this.dateTime + '.csv';
+      // this is necessary as link.click() does not work on the latest firefox
+      link.dispatchEvent(new MouseEvent('click', {bubbles: true, cancelable: true, view: window}));
+
+      // tslint:disable-next-line:only-arrow-functions
+      setTimeout(function() {
+        // For Firefox it is necessary to delay revoking the ObjectURL
+        window.URL.revokeObjectURL(data);
+        link.remove();
+      }, 100);
+    });
+  }
+
+  getRetroActionItemsAndExportToCSV() {
+    // get retros action items and export to csv
+    console.log('exporting retro action items');
+    this.retroService.getRetroActionItemsByIdAndExportToCSV(this.id).subscribe(response => {
+      // It is necessary to create a new blob object with mime-type explicitly set
+      // otherwise only Chrome works like it should
+      const newBlob = new Blob([response], {type: 'application/csv'});
+
+      // IE doesn't allow using a blob object directly as link href
+      // instead it is necessary to use msSaveOrOpenBlob
+      if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+        window.navigator.msSaveOrOpenBlob(newBlob);
+        return;
+      }
+
+      // For other browsers:
+      // Create a link pointing to the ObjectURL containing the blob.
+      const data = window.URL.createObjectURL(newBlob);
+
+      const link = document.createElement('a');
+      link.href = data;
+      link.download = 'Retrospective Action Items ' + this.dateTime + '.csv';
+      // this is necessary as link.click() does not work on the latest firefox
+      link.dispatchEvent(new MouseEvent('click', {bubbles: true, cancelable: true, view: window}));
+
+      // tslint:disable-next-line:only-arrow-functions
+      setTimeout(function() {
+        // For Firefox it is necessary to delay revoking the ObjectURL
+        window.URL.revokeObjectURL(data);
+        link.remove();
+      }, 100);
     });
   }
 

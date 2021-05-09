@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 
-import {faArchive, faHome, faSearch, faSignInAlt, faTimes, faChartLine} from '@fortawesome/free-solid-svg-icons';
+import {faArchive, faChartLine, faHome, faSearch, faSignInAlt, faTimes} from '@fortawesome/free-solid-svg-icons';
 import {Retro} from '../../models/retro';
 import {RetroService} from '../../services/retro.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';

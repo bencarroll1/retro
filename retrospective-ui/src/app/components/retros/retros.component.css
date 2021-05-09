@@ -288,3 +288,19 @@
 .archive-nav {
   padding-right: 56px;
 }
+
+.exportItemsBtn {
+  padding-left: 4rem;
+}
+
+.exportActionItemsBtn {
+  padding-left: 2rem;
+}
+
+#exportItemsBtn {
+  width: max-content;
+}
+
+#exportActionItemsBtn {
+  width: max-content;
+}

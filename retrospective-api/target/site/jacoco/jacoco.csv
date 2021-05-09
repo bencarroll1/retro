@@ -1,0 +1,14 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+Retrospective App,com.retrospective.controllers,RetrosController,147,74,0,0,28,11,7,9,7,9
+Retrospective App,com.retrospective.sentiment,SentimentAnalysis,140,0,12,0,33,0,8,0,2,0
+Retrospective App,com.retrospective.models,BaseEntity,78,52,15,7,2,3,15,6,4,6
+Retrospective App,com.retrospective.models,Retro,62,67,12,8,0,6,11,9,2,8
+Retrospective App,com.retrospective.models,ActionItem,114,28,23,1,1,5,16,6,4,6
+Retrospective App,com.retrospective.models,Item,192,58,37,1,1,8,23,12,4,12
+Retrospective App,com.retrospective.models,ItemType,0,34,0,0,0,4,0,1,0,1
+Retrospective App,com.retrospective.exceptions,RetrosNotFoundException,0,4,0,0,0,2,0,1,0,1
+Retrospective App,com.retrospective.exceptions,ActionItemNotFoundException,4,0,0,0,2,0,1,0,1,0
+Retrospective App,com.retrospective.exceptions,ItemNotFoundException,4,0,0,0,2,0,1,0,1,0
+Retrospective App,com.retrospective.services,RetrosService,226,66,18,0,48,17,16,8,7,8
+Retrospective App,com.retrospective,RestServiceApplication,6,3,0,0,2,1,1,1,1,1
+Retrospective App,com.retrospective.configs,LoadDatabase,183,0,0,0,28,0,4,0,4,0

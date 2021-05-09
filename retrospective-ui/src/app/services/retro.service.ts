@@ -18,6 +18,8 @@ export class RetroService {
   itemsUrlSuffix = '/items';
   actionItemsUrlSuffix = '/action-items';
   sentimentAnalysisSuffix = '/sentiment-analysis';
+  exportItemsSuffix = '/export-items';
+  exportActionItemsSuffix = '/export-actionItems';
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
@@ -126,4 +128,17 @@ export class RetroService {
       console.error('Error updating item: ', error);
     });
   }
+
+  // method to get a retrospectives items by ID from the API and export to CSV
+  getRetroItemsByIdAndExportToCSV(retroId): Observable<Blob> {
+    const uri = this.urlPrefix + retroId + this.exportItemsSuffix;
+    return this.http.get(uri, {responseType: 'blob'});
+  }
+
+  // method to get a retrospectives action items by ID from the API and export to CSV
+  getRetroActionItemsByIdAndExportToCSV(retroId): Observable<Blob> {
+    const uri = this.urlPrefix + retroId + this.exportActionItemsSuffix;
+    return this.http.get(uri, {responseType: 'blob'});
+  }
+
 }

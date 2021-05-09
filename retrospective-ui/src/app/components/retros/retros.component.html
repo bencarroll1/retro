@@ -5,12 +5,23 @@
         <fa-icon [icon]="faArrowLeft" class="btn-outline-arrow-header"></fa-icon>
       </a>
       {{retroName}}
+      <a class="exportItemsBtn">
+        <button (click)="getRetroItemsAndExportToCSV()" type="button" id="exportItemsBtn"
+                class="btn btn-outline-primary">
+          Export Retrospective Items
+        </button>
+      </a>
+      <a class="exportActionItemsBtn">
+        <button (click)="getRetroActionItemsAndExportToCSV()" type="button" id="exportActionItemsBtn"
+                class="btn btn-outline-primary">
+          Export Retrospective Action Items
+        </button>
+      </a>
     </div>
   </nav>
 
   <div class="container-fluid main-container">
     <div class="row top-row">
-
       <!-- GOOD ITEMS -->
       <div class="col-4">
         <h3 class="text-center p-3">

@@ -20,7 +20,7 @@ export class SentimentAnalysisListComponent implements OnInit {
 
   retros: Retro[] = [];
 
-  retroNameFilter: string;
+  sentimentAnalysisListRetroFilter: string;
 
   constructor(private retroService: RetroService) {
   }

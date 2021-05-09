@@ -12,10 +12,17 @@ import com.retrospective.repositories.RetrosRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.supercsv.io.CsvBeanWriter;
+import org.supercsv.io.ICsvBeanWriter;
+import org.supercsv.prefs.CsvPreference;
 
+import javax.servlet.http.HttpServletResponse;
+import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 //service annotation
@@ -173,5 +180,69 @@ public class RetrosService {
 		System.out.println(sentiment);
 		
 		return sentiment; //itemsRepository.findAllByRetroId(id);
+	}
+	
+	public List<Item> getRetroItemsAndExportToCSV(Long id, HttpServletResponse response) throws IOException, RetrosNotFoundException {
+		response.setContentType("text/csv");
+		DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
+		String currentDateTime = dateFormatter.format(new Date());
+		
+		String headerKey = "Content-Disposition";
+		String headerValue = "attachment; filename=retrospective" +
+				"_" +
+				this.getRetroById(id).getName() +
+				"_items_ID-" +
+				id +
+				"_" +
+				currentDateTime +
+				".csv";
+		response.setHeader(headerKey, headerValue);
+		
+		List<Item> listItems = this.getRetroItemsById(id);
+		
+		ICsvBeanWriter csvWriter = new CsvBeanWriter(response.getWriter(), CsvPreference.STANDARD_PREFERENCE);
+		String[] csvHeader = {"Item ID", "Created", "Description", "Type", "Votes"};
+		String[] nameMapping = {"id", "created", "description", "type", "itemVotes"};
+		
+		csvWriter.writeHeader(csvHeader);
+		
+		for (Item item : listItems) {
+			csvWriter.write(item, nameMapping);
+		}
+		csvWriter.close();
+		
+		return itemsRepository.findAllByRetroId(id);
+	}
+	
+	public List<ActionItem> getRetroActionItemsAndExportToCSV(Long id, HttpServletResponse response) throws IOException, RetrosNotFoundException {
+		response.setContentType("text/csv");
+		DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
+		String currentDateTime = dateFormatter.format(new Date());
+		
+		String headerKey = "Content-Disposition";
+		String headerValue = "attachment; filename=retrospective" +
+				"_" +
+				this.getRetroById(id).getName() +
+				"_actionItems_ID-" +
+				id +
+				"_" +
+				currentDateTime +
+				".csv";
+		response.setHeader(headerKey, headerValue);
+		
+		List<ActionItem> listActionItems = this.getRetroActionItemsById(id);
+		
+		ICsvBeanWriter csvWriter = new CsvBeanWriter(response.getWriter(), CsvPreference.STANDARD_PREFERENCE);
+		String[] csvHeader = {"Action Item ID", "Created", "Description"};
+		String[] nameMapping = {"id", "created", "description"};
+		
+		csvWriter.writeHeader(csvHeader);
+		
+		for (ActionItem actionItem : listActionItems) {
+			csvWriter.write(actionItem, nameMapping);
+		}
+		csvWriter.close();
+		
+		return actionItemsRepository.findAllByRetroId(id);
 	}
 }
