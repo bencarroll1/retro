@@ -79,7 +79,7 @@ public class RetrosController {
 	}
 	
 	@GetMapping("/retros/{id}/items/sentiment-analysis")
-	ResponseEntity<List<Item>> getRetroItemsByIdSentimentAnalysis(@PathVariable Long id) throws IOException {
+	ResponseEntity<String> getRetroItemsByIdSentimentAnalysis(@PathVariable Long id) throws IOException {
 		return new ResponseEntity<>(retrosService.getRetroItemsByIdSentimentAnalysis(id), HttpStatus.OK);
 	}
 	

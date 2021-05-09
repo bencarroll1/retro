@@ -122,7 +122,7 @@ public class RetrosService {
 		return actionItemsRepository.save(updatedActionItem);
 	}
 	
-	public List<Item> getRetroItemsByIdSentimentAnalysis(Long id) throws IOException {
+	public String getRetroItemsByIdSentimentAnalysis(Long id) throws IOException {
 		String retrospectiveItem;
 		
 		ArrayList<String> stopWords = new ArrayList<>();
@@ -167,10 +167,11 @@ public class RetrosService {
 				}
 			}
 		}
-		Map<String, Float> sentiment = new HashMap<>();
-		sentiment.put(retrospectiveItem, retrospectiveItemScore);
+//		Map<String, Float> sentiment = new HashMap<>();
+//		sentiment.put(retrospectiveItem, retrospectiveItemScore);
+		String sentiment = "Retrospective Score: " + retrospectiveItemScore;
 		System.out.println(sentiment);
 		
-		return itemsRepository.findAllByRetroId(id);
+		return sentiment; //itemsRepository.findAllByRetroId(id);
 	}
 }

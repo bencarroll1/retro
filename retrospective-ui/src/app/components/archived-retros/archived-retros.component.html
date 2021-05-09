@@ -12,6 +12,10 @@
         <fa-icon [icon]="faArchive" class="btn-outline-arrow-header fa-spin"></fa-icon>
         <a class="nav-title">Archived Retros</a>
       </a>
+      <a [routerLink]="['/sentiment-analysis']" class="sentiment-nav">
+        <fa-icon [icon]="faChartLine" class="btn-outline-arrow-header fa-spin"></fa-icon>
+        <a class="nav-title">Sentiment Analysis</a>
+      </a>
     </div>
   </nav>
   <div class="container-fluid search-bar">
@@ -44,7 +48,7 @@
                   <fa-icon [icon]="faSignInAlt"></fa-icon>
                 </a>
                 <button (click)="archiveRetro(retro)" class="btn bg-unarchive">
-                  <fa-icon [icon]="fatTimes"></fa-icon>
+                  <fa-icon [icon]="faTimes"></fa-icon>
                 </button>
               </div>
             </td>

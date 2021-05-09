@@ -12,6 +12,10 @@
         <fa-icon [icon]="faArchive" class="btn-outline-arrow-header"></fa-icon>
         <a class="nav-title">Archived Retros</a>
       </a>
+      <a [routerLink]="['/sentiment-analysis']" class="sentiment-nav">
+        <fa-icon [icon]="faChartLine" class="btn-outline-arrow-header fa-spin"></fa-icon>
+        <a class="nav-title">Sentiment Analysis</a>
+      </a>
     </div>
   </nav>
   <form #retroForm="ngForm" (ngSubmit)="onSubmit(); retroForm.reset()">

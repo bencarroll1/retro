@@ -1,23 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fde0e226-497d-4627-85cd-60493e3ae1d7" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../retrospective-api/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../retrospective-api/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../retrospective-api/retrospective-api.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../retrospective-api/retrospective-api.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../retrospective-api/src/main/java/com/retrospective/configs/LoadDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/../retrospective-api/src/main/java/com/retrospective/configs/LoadDatabase.java" afterDir="false" />
+    <list default="true" id="8550fa3e-9d20-4d74-84e3-258db6651cc0" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/retrospective-ui.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../retrospective-api/src/main/java/com/retrospective/controllers/RetrosController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../retrospective-api/src/main/java/com/retrospective/controllers/RetrosController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../retrospective-api/src/main/java/com/retrospective/services/RetrosService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../retrospective-api/src/main/java/com/retrospective/services/RetrosService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../retrospective-api/target/classes/com/retrospective/configs/LoadDatabase.class" beforeDir="false" afterPath="$PROJECT_DIR$/../retrospective-api/target/classes/com/retrospective/configs/LoadDatabase.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../retrospective-api/target/classes/com/retrospective/controllers/RetrosController.class" beforeDir="false" afterPath="$PROJECT_DIR$/../retrospective-api/target/classes/com/retrospective/controllers/RetrosController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../retrospective-api/target/classes/com/retrospective/services/RetrosService.class" beforeDir="false" afterPath="$PROJECT_DIR$/../retrospective-api/target/classes/com/retrospective/services/RetrosService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/retrospective-ui.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/__ngcc_entry_points__.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/__ngcc_entry_points__.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app-routing.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/archived-retros/archived-retros.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/archived-retros/archived-retros.component.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/archived-retros/archived-retros.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/archived-retros/archived-retros.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/archived-retros/archived-retros.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/archived-retros/archived-retros.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/retros-list/retros-list.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/retros-list/retros-list.component.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/retros-list/retros-list.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/retros-list/retros-list.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/retros-list/retros-list.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/retros-list/retros-list.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/services/retro.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/retro.service.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,27 +32,37 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="ProjectId" id="1sEE5RtqJgkeKvMwLOOE02TiQvB" />
+  <component name="ProjectId" id="1sIo0SBZEZRc6869Yn8ljVeWh0F" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
+    <option name="showVisibilityIcons" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.2" />
-    <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\IntelliJ IDEA 2019.2.3\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="ts.external.directory.path" value="C:\Users\benca\Desktop\Retro\retrospective-ui\node_modules\typescript\lib" />
   </component>
   <component name="RunManager" selected="npm.Angular CLI Server">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="E2E Tests (retrospective-ui)" type="JavaScriptTestRunnerProtractor">
       <config-file value="$PROJECT_DIR$/e2e/protractor.conf.js" />
       <node-interpreter value="project" />
@@ -73,14 +88,12 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="fde0e226-497d-4627-85cd-60493e3ae1d7" name="Default Changelist" comment="" />
-      <created>1620429165058</created>
+      <changelist id="8550fa3e-9d20-4d74-84e3-258db6651cc0" name="Default Changelist" comment="" />
+      <created>1620569244346</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1620429165058</updated>
-      <workItem from="1620429166469" duration="810000" />
-      <workItem from="1620433011161" duration="74000" />
-      <workItem from="1620433124860" duration="115000" />
+      <updated>1620569244346</updated>
+      <workItem from="1620569246156" duration="12190000" />
     </task>
     <servers />
   </component>

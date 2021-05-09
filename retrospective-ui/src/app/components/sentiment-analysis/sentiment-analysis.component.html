@@ -1,0 +1,35 @@
+<div class="container">
+  <nav class="navbar fixed-top navbar-dark bg-dark">
+    <div class="navbar-brand mb-0 h1">
+      <a [routerLink]="['/retros']" class="logo-home-page-nav">
+        <img src="../../../assets/logo.png" class="logo-responsive" alt="Retro Logo">
+      </a>
+      <a [routerLink]="['/retros']" class="home-page-nav">
+        <fa-icon [icon]="faHome" class="btn-outline-arrow-header"></fa-icon>
+        <a class="nav-title">Home Page</a>
+      </a>
+      <a [routerLink]="['/archived-retros']" class="archive-nav">
+        <fa-icon [icon]="faArchive" class="btn-outline-arrow-header fa-spin"></fa-icon>
+        <a class="nav-title">Archived Retros</a>
+      </a>
+      <a [routerLink]="['/sentiment-analysis']" class="sentiment-nav">
+        <fa-icon [icon]="faChartLine" class="btn-outline-arrow-header fa-spin"></fa-icon>
+        <a class="nav-title">Sentiment Analysis</a>
+      </a>
+    </div>
+  </nav>
+  <h2 class="page-header" for="retroNameInput"><strong>Sentiment Analysis on:</strong> {{retroName}}</h2>
+  <p><strong>How does Retro perform a sentiment analysis on a retrospective?</strong></p>
+  <p>In order to perform a sentiment analysis, Retro takes in all of the words used in a retrospective.
+    Each word is then compared to the AFINN sentiment analysis dictionary and assigned a positive or negative score,
+    depending on whether
+    the word is associated with being positive or negative, e.g., ability has a score of 2. The resulting scores are
+    added together and the overall sentiment of the
+    retrospective is then determined. A score above 0 is considered a positive sentiment, and below 0 is considered
+    negative.
+  </p>
+  <p>Score in big font</p>
+  <p>Here: {{sentimentAnalysis}}</p>
+  <p>Addition of circle out of 10 for score surrounding score</p>
+
+</div>

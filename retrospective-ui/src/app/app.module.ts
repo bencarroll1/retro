@@ -16,6 +16,8 @@ import {ActionItemFormComponent} from './components/action-item-form/action-item
 import {RetroItemVotesPipe} from './components/retros/retro-item-votes.pipe';
 import {ArchivedRetrosComponent} from './components/archived-retros/archived-retros.component';
 import {RetroArchivedPipe} from './components/retros-list/retro-archived.pipe';
+import {SentimentAnalysisComponent} from './components/sentiment-analysis/sentiment-analysis.component';
+import { SentimentAnalysisListComponent } from './components/sentiment-analysis-list/sentiment-analysis-list.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import {RetroArchivedPipe} from './components/retros-list/retro-archived.pipe';
     ItemFormComponent,
     ActionItemFormComponent,
     ArchivedRetrosComponent,
-    RetroArchivedPipe
+    RetroArchivedPipe,
+    SentimentAnalysisComponent,
+    SentimentAnalysisListComponent
   ],
   imports: [
     // declaring imports

@@ -59,6 +59,11 @@ input {
   color: white;
 }
 
+.sentiment-nav {
+  padding-left: 56px;
+  color: white;
+}
+
 .logo-home-page-nav {
   padding-right: 56px;
 }

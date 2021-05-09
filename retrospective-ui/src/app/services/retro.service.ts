@@ -17,6 +17,7 @@ export class RetroService {
   urlPrefixActionItems = '/api/action-items/';
   itemsUrlSuffix = '/items';
   actionItemsUrlSuffix = '/action-items';
+  sentimentAnalysisSuffix = '/sentiment-analysis';
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
@@ -44,6 +45,12 @@ export class RetroService {
   // method to get a retrospective from the API by ID
   getRetroById(id): Observable<HttpResponse<Retro>> {
     return this.http.get<Retro>(this.urlPrefix + id, {observe: 'response'});
+  }
+
+  // method to get a retrospective from the API by ID
+  getRetroSentimentAnalysisById(id): Observable<HttpResponse<string>> {
+    return this.http.get<string>(this.urlPrefix + id + this.itemsUrlSuffix + this.sentimentAnalysisSuffix,
+      {observe: 'response'});
   }
 
   // method to update a retros contents by ID

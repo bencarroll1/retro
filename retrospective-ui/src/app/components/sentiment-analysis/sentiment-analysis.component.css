@@ -36,30 +36,13 @@
   padding: 12px;
 }
 
-.search-bar {
-  padding-top: 60px;
-}
-
-.bg-unarchive {
-  background-color: #90CCF4;
-}
-
-.bg-enter {
-  background-color: #bddba8;
-}
-
-input {
-  font-size: 14pt;
-}
-
-.archived-retro-details {
-  font-size: 14pt;
-}
-
-.search {
-  padding-top: 2rem;
-}
-
 .logo-home-page-nav {
   padding-right: 56px;
+}
+
+.page-header {
+  padding-top: 5rem;
+  padding-bottom: 10px;
+  text-align: center;
+  vertical-align: middle;
 }
