@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import {Retro} from '../models/retro';
 import {Item} from '../models/item';
 import {ActionItem} from '../models/actionItem';
+import {SentimentAnalysis} from '../models/sentimentAnalysis';
 
 
 @Injectable({
@@ -47,12 +48,6 @@ export class RetroService {
   // method to get a retrospective from the API by ID
   getRetroById(id): Observable<HttpResponse<Retro>> {
     return this.http.get<Retro>(this.urlPrefix + id, {observe: 'response'});
-  }
-
-  // method to get a retrospective from the API by ID
-  getRetroSentimentAnalysisById(id): Observable<HttpResponse<string>> {
-    return this.http.get<string>(this.urlPrefix + id + this.itemsUrlSuffix + this.sentimentAnalysisSuffix,
-      {observe: 'response'});
   }
 
   // method to update a retros contents by ID
@@ -127,6 +122,13 @@ export class RetroService {
     }, error => {
       console.error('Error updating item: ', error);
     });
+  }
+
+  // method to get a retrospectives items by ID from the API
+  getRetroItemsByIdForSentimentAnalysis(id): Observable<HttpResponse<SentimentAnalysis>> {
+    return this.http.get<SentimentAnalysis>(
+      this.urlPrefix + id + this.itemsUrlSuffix + this.sentimentAnalysisSuffix,
+      {observe: 'response'});
   }
 
   // method to get a retrospectives items by ID from the API and export to CSV

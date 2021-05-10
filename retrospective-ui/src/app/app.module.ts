@@ -17,8 +17,9 @@ import {RetroItemVotesPipe} from './components/retros/retro-item-votes.pipe';
 import {ArchivedRetrosComponent} from './components/archived-retros/archived-retros.component';
 import {RetroArchivedPipe} from './components/retros-list/retro-archived.pipe';
 import {SentimentAnalysisComponent} from './components/sentiment-analysis/sentiment-analysis.component';
-import { SentimentAnalysisListComponent } from './components/sentiment-analysis-list/sentiment-analysis-list.component';
-import { SentimentAnalysisListPipe } from './components/sentiment-analysis-list/sentiment-analysis-list.pipe';
+import {SentimentAnalysisListComponent} from './components/sentiment-analysis-list/sentiment-analysis-list.component';
+import {SentimentAnalysisListPipe} from './components/sentiment-analysis-list/sentiment-analysis-list.pipe';
+import {NgCircleProgressModule} from 'ng-circle-progress';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,30 @@ import { SentimentAnalysisListPipe } from './components/sentiment-analysis-list/
     ReactiveFormsModule,
     FormsModule,
     FontAwesomeModule,
-    NgbModule
+    NgbModule,
+
+    // Specify ng-circle-progress as an import
+    NgCircleProgressModule.forRoot({
+      // set defaults here
+      outerStrokeColor: '#1B64EE',
+      innerStrokeColor: '#3EACDF',
+      animationDuration: 300,
+      backgroundStrokeWidth: 0,
+      backgroundPadding: 10,
+      radius: 150,
+      space: 10,
+      toFixed: 2,
+      maxPercent: 100,
+      unitsFontWeight: '600',
+      outerStrokeWidth: 18,
+      innerStrokeWidth: 8,
+      titleFontSize: '30',
+      titleFontWeight: '300',
+      showSubtitle: false,
+      showUnits: false,
+      animation: true,
+      showBackground: false,
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -6,6 +6,7 @@ import com.retrospective.exceptions.RetrosNotFoundException;
 import com.retrospective.models.ActionItem;
 import com.retrospective.models.Item;
 import com.retrospective.models.Retro;
+import com.retrospective.models.SentimentAnalysis;
 import com.retrospective.services.RetrosService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -77,11 +78,6 @@ public class RetrosController {
 	@GetMapping("/retros/{id}/items")
 	ResponseEntity<List<Item>> getRetroItemsById(@PathVariable Long id) {
 		return new ResponseEntity<>(retrosService.getRetroItemsById(id), HttpStatus.OK);
-	}
-	
-	@GetMapping("/retros/{id}/items/sentiment-analysis")
-	ResponseEntity<String> getRetroItemsByIdSentimentAnalysis(@PathVariable Long id) throws IOException {
-		return new ResponseEntity<>(retrosService.getRetroItemsByIdSentimentAnalysis(id), HttpStatus.OK);
 	}
 	
 	//DELETE method for removing a retrospectives item by ID
@@ -163,6 +159,15 @@ public class RetrosController {
 		System.out.println("Exporting action items to CSV");
 		return new ResponseEntity<>(retrosService.getRetroActionItemsAndExportToCSV(id, response), HttpStatus.OK);
 	}
+
+//	@GetMapping("/retros/{id}/sentiment-analysis")
+//	ResponseEntity<SentimentAnalysis> getRetroAndExportItemsToCSV(@PathVariable Long id, HttpServletResponse response) throws RetrosNotFoundException, IOException {
+//		System.out.println("Exporting items to CSV");
+//		return new ResponseEntity<>(retrosService.getRetroItemsAndExportToCSV(id, response), HttpStatus.OK);
+//	}
 	
-	
+	@GetMapping("/retros/{id}/items/sentiment-analysis")
+	ResponseEntity<SentimentAnalysis> getRetroItemsByIdSentimentAnalysis(@PathVariable Long id) throws IOException {
+		return new ResponseEntity<>(retrosService.getRetroItemsByIdForSentimentAnalysis(id), HttpStatus.OK);
+	}
 }

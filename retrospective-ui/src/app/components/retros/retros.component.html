@@ -5,6 +5,8 @@
         <fa-icon [icon]="faArrowLeft" class="btn-outline-arrow-header"></fa-icon>
       </a>
       {{retroName}}
+    </div>
+    <div class="navbar-brand mb-0 h1">
       <a class="exportItemsBtn">
         <button (click)="getRetroItemsAndExportToCSV()" type="button" id="exportItemsBtn"
                 class="btn btn-outline-primary">
@@ -15,6 +17,12 @@
         <button (click)="getRetroActionItemsAndExportToCSV()" type="button" id="exportActionItemsBtn"
                 class="btn btn-outline-primary">
           Export Retrospective Action Items
+        </button>
+      </a>
+      <a class="exportActionItemsBtn">
+        <button [routerLink]="['/retros/' + id + '/sentiment-analysis']" type="button" id="sentimentAnalysisBtn"
+                class="btn btn-outline-info">
+          Sentiment Analysis
         </button>
       </a>
     </div>

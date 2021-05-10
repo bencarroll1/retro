@@ -18,18 +18,54 @@
       </a>
     </div>
   </nav>
-  <h2 class="page-header" for="retroNameInput"><strong>Sentiment Analysis on:</strong> {{retroName}}</h2>
-  <p><strong>How does Retro perform a sentiment analysis on a retrospective?</strong></p>
-  <p>In order to perform a sentiment analysis, Retro takes in all of the words used in a retrospective.
-    Each word is then compared to the AFINN sentiment analysis dictionary and assigned a positive or negative score,
-    depending on whether
-    the word is associated with being positive or negative, e.g., ability has a score of 2. The resulting scores are
-    added together and the overall sentiment of the
-    retrospective is then determined. A score above 0 is considered a positive sentiment, and below 0 is considered
-    negative.
-  </p>
-  <p>Score in big font</p>
-  <p>Here: {{sentimentAnalysis}}</p>
-  <p>Addition of circle out of 10 for score surrounding score</p>
-
+  <div class="container-fluid main-container">
+    <h2 class="page-header" for="retroNameInput">
+      <strong>Sentiment Analysis on:
+        <a [routerLink]="['/retros/'+id]" class="home-page-nav">
+          <a class="retro-name">{{retroName}}</a>
+        </a>
+      </strong>
+    </h2>
+    <div class="sentiment-analysis-desc">
+      <div *ngIf="sentimentAnalysisScore > 0; then thenBlock else elseBlock"></div>
+      <ng-template #thenBlock>
+        <div class="percentage-circle">
+          <circle-progress class="circle-display"
+                           [percent]=(sentimentAnalysisScore)>
+          </circle-progress>
+        </div>
+        The sentiment from this retrospective is positive as indicated by the Sentiment Analysis Score
+        of {{sentimentAnalysisScore}}, as dictated by the words used in the retrospective.
+        From this it can be said the team morale is in good place, and that the team are content.
+        <br><br>
+        It is recommended that the manager try to carry this level of team morale and contentment over into subsequent
+        sprints.
+      </ng-template>
+      <ng-template #elseBlock>
+        The sentiment from this retrospective is negative as indicated by the Sentiment Analysis Score
+        of {{sentimentAnalysisScore}}, as dictated by the words used in the retrospective.
+        From this it can be said the team morale is in poor place, and that the team are not content.
+        <br><br>
+        It is recommended that the manager address this issue immediately.
+      </ng-template>
+    </div>
+    <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0" class="accordion">
+      <ngb-panel>
+        <ng-template ngbPanelTitle>
+          <p class="sentiment-title"><strong>How does Retro perform a Sentiment Analysis on a retrospective?</strong>
+          </p>
+        </ng-template>
+        <ng-template ngbPanelContent>
+          <p class="sentiment-desc">In order to perform a Sentiment Analysis, Retro takes in all of the words used in a
+            retrospective.
+            Each word is then compared to the AFINN Sentiment Analysis dictionary and assigned a positive or negative
+            score,
+            depending on whether the word is associated with being positive or negative, e.g., ability has a score of 2.
+            The resulting scores are
+            added together and the overall sentiment of the retrospective is then determined.
+            A score above 0 is considered a positive sentiment, and below 0 is considered negative.</p>
+        </ng-template>
+      </ngb-panel>
+    </ngb-accordion>
+  </div>
 </div>

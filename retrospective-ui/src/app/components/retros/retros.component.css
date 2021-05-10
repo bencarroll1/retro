@@ -304,3 +304,7 @@
 #exportActionItemsBtn {
   width: max-content;
 }
+
+#sentimentAnalysisBtn {
+  width: max-content;
+}

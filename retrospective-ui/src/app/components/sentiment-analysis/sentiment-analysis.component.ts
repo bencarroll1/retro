@@ -17,7 +17,7 @@ export class SentimentAnalysisComponent implements OnInit {
   faChartLine = faChartLine;
 
   retroName: string;
-  sentimentAnalysis: string;
+  sentimentAnalysisScore: number;
   sent: string;
   id = this.route.snapshot.paramMap.get('id');
 
@@ -27,20 +27,21 @@ export class SentimentAnalysisComponent implements OnInit {
   ngOnInit(): void {
     this.retroService.getRetroById(this.id).subscribe(response => this.retroName = response.body.name);
 
-    this.retroService.getRetroSentimentAnalysisById(this.id).subscribe(response => this.sentimentAnalysis = response.body
-      // console.log(response.body);
-      // return JSON.stringify(response.body);
-    );
+    this.retroService.getRetroItemsByIdForSentimentAnalysis(this.id)
+      .subscribe(response => this.sentimentAnalysisScore = (response.body.score * 10)
+        // console.log(response.body);
+        // return JSON.stringify(response.body);
+      );
   }
 
-  // getRetroSentimentAnalysis() {
-  //   // get retros sentiment analysis
-  //   console.log('fetching retro sentiment analysis');
-  //   this.retroService.getRetroSentimentAnalysisById(this.id).subscribe(response => {
-  //     console.log('hello');
-  //     console.log(response);
-  //     return response.body;
-  //   });
-  // }
+  getRetroSentimentAnalysis() {
+    // get retros sentiment analysis
+    console.log('fetching retro sentiment analysis');
+    this.retroService.getRetroItemsByIdForSentimentAnalysis(this.id).subscribe(response => {
+      console.log('hello');
+      console.log(response);
+      return response.body;
+    });
+  }
 
 }

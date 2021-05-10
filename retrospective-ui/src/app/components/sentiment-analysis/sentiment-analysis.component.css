@@ -46,3 +46,49 @@
   text-align: center;
   vertical-align: middle;
 }
+
+.circle-display {
+  padding-left: 30%;
+}
+
+.percentage-circle {
+  padding: 4rem;
+}
+
+.sentiment-title {
+  font-size: 22px;
+  text-align: center;
+  color: black;
+  text-decoration-color: black;
+  display: flex;
+  justify-content: center;
+}
+
+.accordion-panel {
+  justify-content: center;
+  display: flex;
+}
+
+.accordion {
+  align-content: center;
+  padding: 4rem;
+}
+
+.sentiment-desc {
+  font-size: 20px;
+}
+
+.sentiment-analysis-desc {
+  font-size: 20px;
+  align-items: center;
+}
+
+.retro-name {
+  color: black;
+  font-style: italic;
+}
+
+.retro-name:hover {
+  color: black;
+  text-decoration: underline;
+}

@@ -6,9 +6,11 @@ import com.retrospective.exceptions.RetrosNotFoundException;
 import com.retrospective.models.ActionItem;
 import com.retrospective.models.Item;
 import com.retrospective.models.Retro;
+import com.retrospective.models.SentimentAnalysis;
 import com.retrospective.repositories.ActionItemsRepository;
 import com.retrospective.repositories.ItemsRepository;
 import com.retrospective.repositories.RetrosRepository;
+import com.retrospective.repositories.SentimentAnalysisRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,7 +19,6 @@ import org.supercsv.io.ICsvBeanWriter;
 import org.supercsv.prefs.CsvPreference;
 
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -33,11 +34,13 @@ public class RetrosService {
 	private final RetrosRepository retrosRepository;
 	private final ItemsRepository itemsRepository;
 	private final ActionItemsRepository actionItemsRepository;
+	private final SentimentAnalysisRepository sentimentAnalysisRepository;
 	
-	RetrosService(RetrosRepository retrosRepository, ItemsRepository itemsRepository, ActionItemsRepository actionItemsRepository) {
+	RetrosService(RetrosRepository retrosRepository, ItemsRepository itemsRepository, ActionItemsRepository actionItemsRepository, SentimentAnalysisRepository sentimentAnalysisRepository) {
 		this.retrosRepository = retrosRepository;
 		this.itemsRepository = itemsRepository;
 		this.actionItemsRepository = actionItemsRepository;
+		this.sentimentAnalysisRepository = sentimentAnalysisRepository;
 	}
 	
 	//method to get all retrospectives from retros repo. method called by controller
@@ -129,57 +132,52 @@ public class RetrosService {
 		return actionItemsRepository.save(updatedActionItem);
 	}
 	
-	public String getRetroItemsByIdSentimentAnalysis(Long id) throws IOException {
-		String retrospectiveItem;
-		
-		ArrayList<String> stopWords = new ArrayList<>();
-		BufferedReader stop = new BufferedReader(new FileReader("src/main/resources/Dictionaries/stopWords.txt"));
-		String line;
-		while ((line = stop.readLine()) != null) {
-			stopWords.add(line);
-		}
-		
-		Map<String, String> map = new HashMap<>();
-		BufferedReader in = new BufferedReader(new FileReader("src/main/resources/Dictionaries/AFINN-en-165.txt"));
-		
-		while ((line = in.readLine()) != null) {
-			String[] parts = line.split("\t");
-			map.put(parts[0], parts[1]);
-		}
-		in.close();
-		
-		List<Item> retroItems = itemsRepository.findAllByRetroId(id);
-		String retroItemDescriptionWords = retroItems.toString().replaceAll("[^a-zA-Z]", " ");
-		String trimmedRetroItemDescriptionWords = retroItemDescriptionWords.trim();
-		if (trimmedRetroItemDescriptionWords.contains("Item")) {
-			trimmedRetroItemDescriptionWords.replace("Item", "");
-		}
-//		List<String> retroItemDescriptionWords = new ArrayList<>();
-//		//string tokenizer, split by commas? or =?
-//		String[] tokens = trimmed.split(" ");
-//		retroItemDescriptionWords.add(Arrays.toString(tokens));
-//		retroItemDescriptionWords.removeIf(word -> word.equals(" "));
+	public SentimentAnalysis getRetroItemsByIdForSentimentAnalysis(Long id) throws IOException {
+		Retro retro = new Retro();
+		SentimentAnalysis sentimentAnalysis = new SentimentAnalysis();
+		retro.setId(id);
 		
 		float retrospectiveItemScore = 0;
-		retrospectiveItem = trimmedRetroItemDescriptionWords;
-		String[] word = retrospectiveItem.split(" ");
 		
-		for (int i = 0; i < word.length; i++) {
-			if (stopWords.contains(word[i].toLowerCase())) {
-			
+		ArrayList<String> stopWords = new ArrayList<>();
+		BufferedReader stopWordsBuffReader = new BufferedReader(new FileReader("src/main/resources/Dictionaries/stopWords.txt"));
+		String line;
+		while ((line = stopWordsBuffReader.readLine()) != null) {
+			stopWords.add(line);
+		}
+		stopWordsBuffReader.close();
+		
+		Map<String, String> AfinnDictionary = new HashMap<>();
+		BufferedReader AfinnBuffReader = new BufferedReader(new FileReader("src/main/resources/Dictionaries/AFINN-en-165.txt"));
+		while ((line = AfinnBuffReader.readLine()) != null) {
+			String[] parts = line.split("\t");
+			AfinnDictionary.put(parts[0], parts[1]);
+		}
+		AfinnBuffReader.close();
+		
+		String retroItemWords = (itemsRepository.findAllByRetroId(id).toString().replaceAll("[^a-zA-Z]", " ")).trim();
+		String[] words = retroItemWords.split(" ");
+		
+		for (String word : words) {
+			if (stopWords.contains(word.toLowerCase())) {
+				// skip word
 			} else {
-				if (map.get(word[i]) != null) {
-					String wordScore = map.get(word[i].toLowerCase());
+				if (AfinnDictionary.get(word) != null) {
+//					System.out.println(word);
+					String wordScore = AfinnDictionary.get(word.toLowerCase());
+//					System.out.println("Current retrospective sentiment analysis score " + retrospectiveItemScore);
 					retrospectiveItemScore = retrospectiveItemScore + Integer.parseInt(wordScore);
+					sentimentAnalysis.setScore(retrospectiveItemScore);
+//					System.out.println("New retrospective score: " + retrospectiveItemScore);
 				}
 			}
 		}
-//		Map<String, Float> sentiment = new HashMap<>();
-//		sentiment.put(retrospectiveItem, retrospectiveItemScore);
-		String sentiment = "Retrospective Score: " + retrospectiveItemScore;
-		System.out.println(sentiment);
+		sentimentAnalysis.setRetro(retro);
+		sentimentAnalysis.setId(retro.getId());
+		sentimentAnalysis.setRetroItems(retroItemWords);
+//		System.out.println(sentimentAnalysis.getScore());
 		
-		return sentiment; //itemsRepository.findAllByRetroId(id);
+		return sentimentAnalysis;
 	}
 	
 	public List<Item> getRetroItemsAndExportToCSV(Long id, HttpServletResponse response) throws IOException, RetrosNotFoundException {
