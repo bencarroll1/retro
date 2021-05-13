@@ -11,7 +11,7 @@ Run `SPRING_PROFILES_ACTIVE= mvn spring-boot:run` in the API directory for a ser
 Changes any of the source files will display upon reload.
 
 When running using the local profile, the example retrospective's details are shown.
-![Displaying example retrospectives provided by local profile](retro-api-8080.png)
+![Displaying example retrospectives provided by local profile](retro-api-8080.PNG)
 
 Similarly, navigate to `http://localhost:8080/api/retros/1` to only display that retrospective's details.
 <br>
@@ -28,7 +28,7 @@ When running the local profile, the example retrospectives are seen on the UI.
 ## Using the application
 Upon running the above commands and navigating to `http://localhost:4200/`, the example retrospectives are shown.
 
-![Displaying example retrospectives provided by local profile on the UI](retros-home.png)
+![Displaying example retrospectives provided by local profile on the UI](retros-home.PNG)
 
 From here, create a new retrospective by entering a name and clicking the check-mark button. Retrospectives that have been archived can also be 
 viewed by clicking the archived Retrospectives button on the navbar.
@@ -44,7 +44,7 @@ Upon entering a retrospective, three columns are present at the top of the page 
 - Questions - denotes where the team should ask any questions they have.
 - Things that did not go so well - denotes where things that didn't so well in the sprint should be entered.
 
-![Displaying items from the example retrospectives](retro-items.png)
+![Displaying items from the example retrospectives](retro-items.PNG)
 
 <br>
 
@@ -60,7 +60,7 @@ Item buttons do the following:
 
 At the bottom of the page, the retrospective's action items are shown.
 
-![Displaying action items from the example retrospectives](retro-action-items.png)
+![Displaying action items from the example retrospectives](retro-action-items.PNG)
 
 Action item buttons do the following:
 - Pencil: opens the item editor, allowing the modification of the item's description.
@@ -74,7 +74,7 @@ on.
 Retro will then provide a score out of one hundred for the sentiment present in a retrospective, 
 and a recommendation depending whether the sentiment is positive or negative.
 
-![Displaying sentiment analysis from the example retrospective](retro-sentiment-analysis.png)
+![Displaying sentiment analysis from the example retrospective](retro-sentiment-analysis.PNG)
 
 ## Structure
 
