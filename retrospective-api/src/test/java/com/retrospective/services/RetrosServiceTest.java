@@ -1,19 +1,18 @@
 package com.retrospective.services;
 
 import com.retrospective.exceptions.RetrosNotFoundException;
-import com.retrospective.models.ActionItem;
-import com.retrospective.models.Item;
-import com.retrospective.models.ItemType;
-import com.retrospective.models.Retro;
+import com.retrospective.models.*;
 import com.retrospective.repositories.ActionItemsRepository;
 import com.retrospective.repositories.ItemsRepository;
 import com.retrospective.repositories.RetrosRepository;
+import com.retrospective.repositories.SentimentAnalysisRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -31,6 +30,9 @@ class RetrosServiceTest {
 	
 	@MockBean
 	private ActionItemsRepository actionItemsRepository;
+	
+	@MockBean
+	private SentimentAnalysisRepository sentimentAnalysisRepository;
 	
 	@Autowired
 	private RetrosService retroService;
@@ -256,5 +258,23 @@ class RetrosServiceTest {
 		//then
 		Assertions.assertNull(actualRetro.getId(), "id was not null");
 		Assertions.assertNull(actualRetro.getName(), "name was not null");
+	}
+	
+	@Test
+	void getSentimentAnalysisByRetroIdWhenRetroExists() throws IOException {
+		// given
+		Retro retro1 = new Retro();
+		retro1.setId(1L);
+		SentimentAnalysis expectedSentimentAnalysis = new SentimentAnalysis(
+				"Thorough discussion on design of our new product. Excited as" +
+						" this will give us the ability to quickly proceed with development",
+				5, retro1);
+		when(sentimentAnalysisRepository.findById(1L)).thenReturn(Optional.of(expectedSentimentAnalysis));
+		
+		// when
+		SentimentAnalysis actualSentimentAnalysis = retroService.getRetroItemsByIdForSentimentAnalysis(retro1.getId());
+		
+		// then
+		Assertions.assertNotNull(actualSentimentAnalysis);
 	}
 }

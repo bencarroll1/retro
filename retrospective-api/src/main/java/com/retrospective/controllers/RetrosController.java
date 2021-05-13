@@ -148,24 +148,21 @@ public class RetrosController {
 		}
 	}
 	
+	// GET method to export retrospective items to a CSV file
 	@GetMapping("/retros/{id}/export-items")
 	ResponseEntity<List<Item>> getRetroAndExportItemsToCSV(@PathVariable Long id, HttpServletResponse response) throws RetrosNotFoundException, IOException {
 		System.out.println("Exporting items to CSV");
 		return new ResponseEntity<>(retrosService.getRetroItemsAndExportToCSV(id, response), HttpStatus.OK);
 	}
 	
+	// GET method to export retrospective action items to a CSV file
 	@GetMapping("/retros/{id}/export-actionItems")
 	ResponseEntity<List<ActionItem>> getRetroAndExportActionItemsToCSV(@PathVariable Long id, HttpServletResponse response) throws RetrosNotFoundException, IOException {
 		System.out.println("Exporting action items to CSV");
 		return new ResponseEntity<>(retrosService.getRetroActionItemsAndExportToCSV(id, response), HttpStatus.OK);
 	}
-
-//	@GetMapping("/retros/{id}/sentiment-analysis")
-//	ResponseEntity<SentimentAnalysis> getRetroAndExportItemsToCSV(@PathVariable Long id, HttpServletResponse response) throws RetrosNotFoundException, IOException {
-//		System.out.println("Exporting items to CSV");
-//		return new ResponseEntity<>(retrosService.getRetroItemsAndExportToCSV(id, response), HttpStatus.OK);
-//	}
 	
+	// GET method to retrieve the sentiment analysis of a retrospective
 	@GetMapping("/retros/{id}/items/sentiment-analysis")
 	ResponseEntity<SentimentAnalysis> getRetroItemsByIdSentimentAnalysis(@PathVariable Long id) throws IOException {
 		return new ResponseEntity<>(retrosService.getRetroItemsByIdForSentimentAnalysis(id), HttpStatus.OK);

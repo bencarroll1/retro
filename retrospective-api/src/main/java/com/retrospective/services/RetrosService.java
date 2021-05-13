@@ -10,7 +10,6 @@ import com.retrospective.models.SentimentAnalysis;
 import com.retrospective.repositories.ActionItemsRepository;
 import com.retrospective.repositories.ItemsRepository;
 import com.retrospective.repositories.RetrosRepository;
-import com.retrospective.repositories.SentimentAnalysisRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,13 +33,11 @@ public class RetrosService {
 	private final RetrosRepository retrosRepository;
 	private final ItemsRepository itemsRepository;
 	private final ActionItemsRepository actionItemsRepository;
-	private final SentimentAnalysisRepository sentimentAnalysisRepository;
 	
-	RetrosService(RetrosRepository retrosRepository, ItemsRepository itemsRepository, ActionItemsRepository actionItemsRepository, SentimentAnalysisRepository sentimentAnalysisRepository) {
+	RetrosService(RetrosRepository retrosRepository, ItemsRepository itemsRepository, ActionItemsRepository actionItemsRepository) {
 		this.retrosRepository = retrosRepository;
 		this.itemsRepository = itemsRepository;
 		this.actionItemsRepository = actionItemsRepository;
-		this.sentimentAnalysisRepository = sentimentAnalysisRepository;
 	}
 	
 	//method to get all retrospectives from retros repo. method called by controller
@@ -132,25 +129,27 @@ public class RetrosService {
 		return actionItemsRepository.save(updatedActionItem);
 	}
 	
+	// method to perform a sentiment analysis on a retrospective's items by retro id
 	public SentimentAnalysis getRetroItemsByIdForSentimentAnalysis(Long id) throws IOException {
 		Retro retro = new Retro();
 		SentimentAnalysis sentimentAnalysis = new SentimentAnalysis();
 		retro.setId(id);
 		
 		float retrospectiveItemScore = 0;
+		String wordLine;
 		
 		ArrayList<String> stopWords = new ArrayList<>();
 		BufferedReader stopWordsBuffReader = new BufferedReader(new FileReader("src/main/resources/Dictionaries/stopWords.txt"));
-		String line;
-		while ((line = stopWordsBuffReader.readLine()) != null) {
-			stopWords.add(line);
+		
+		while ((wordLine = stopWordsBuffReader.readLine()) != null) {
+			stopWords.add(wordLine);
 		}
 		stopWordsBuffReader.close();
 		
 		Map<String, String> AfinnDictionary = new HashMap<>();
 		BufferedReader AfinnBuffReader = new BufferedReader(new FileReader("src/main/resources/Dictionaries/AFINN-en-165.txt"));
-		while ((line = AfinnBuffReader.readLine()) != null) {
-			String[] parts = line.split("\t");
+		while ((wordLine = AfinnBuffReader.readLine()) != null) {
+			String[] parts = wordLine.split("\t");
 			AfinnDictionary.put(parts[0], parts[1]);
 		}
 		AfinnBuffReader.close();
@@ -161,21 +160,18 @@ public class RetrosService {
 		for (String word : words) {
 			if (stopWords.contains(word.toLowerCase())) {
 				// skip word
+				System.out.println("Word skipped: " + word);
 			} else {
 				if (AfinnDictionary.get(word) != null) {
-//					System.out.println(word);
 					String wordScore = AfinnDictionary.get(word.toLowerCase());
-//					System.out.println("Current retrospective sentiment analysis score " + retrospectiveItemScore);
 					retrospectiveItemScore = retrospectiveItemScore + Integer.parseInt(wordScore);
 					sentimentAnalysis.setScore(retrospectiveItemScore);
-//					System.out.println("New retrospective score: " + retrospectiveItemScore);
 				}
 			}
 		}
 		sentimentAnalysis.setRetro(retro);
 		sentimentAnalysis.setId(retro.getId());
 		sentimentAnalysis.setRetroItems(retroItemWords);
-//		System.out.println(sentimentAnalysis.getScore());
 		
 		return sentimentAnalysis;
 	}
@@ -186,14 +182,10 @@ public class RetrosService {
 		String currentDateTime = dateFormatter.format(new Date());
 		
 		String headerKey = "Content-Disposition";
-		String headerValue = "attachment; filename=retrospective" +
-				"_" +
+		String headerValue = "attachment; filename=retrospective_" +
 				this.getRetroById(id).getName() +
-				"_items_ID-" +
-				id +
-				"_" +
-				currentDateTime +
-				".csv";
+				"_items_ID-" + id + "_" + currentDateTime + ".csv";
+		
 		response.setHeader(headerKey, headerValue);
 		
 		List<Item> listItems = this.getRetroItemsById(id);

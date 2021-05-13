@@ -43,7 +43,4 @@ public class Item extends BaseEntity {
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JsonIgnore
 	private Retro retro;
-	
-	
 }
-

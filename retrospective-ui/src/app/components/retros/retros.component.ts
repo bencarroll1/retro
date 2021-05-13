@@ -108,6 +108,120 @@ export class RetrosComponent implements OnInit, OnDestroy {
     });
   }
 
+  sortItems(itemsArray: Item[]): Item[] {
+    // sort items by if item is done or not: method needs work
+    return itemsArray.sort((a, b) => {
+      return (a.itemFlag === b.itemFlag) ? 0 : a.itemFlag ? 1 : -1;
+    });
+  }
+
+  getRetroActionItems() {
+    // get retros action items
+    console.log('fetching retro action items');
+    this.retroService.getRetroActionItemsById(this.id).subscribe(response => {
+      this.actionItems = response.body;
+    });
+  }
+
+  updateItemDescription(item: Item) {
+    console.log(item.id);
+    console.log(item.description);
+    this.retroService.updateRetroItemById(item);
+  }
+
+  deleteRetroItemById(itemId) {
+    this.retroService.deleteRetroItemById(itemId).subscribe((response) => {
+      this.retroService.items = this.retroService.items.filter((item) => {
+        return item.id !== itemId;
+      });
+    });
+  }
+
+  deleteRetroActionItemById(actionItemId) {
+    this.retroService.deleteRetroActionItemById(actionItemId).subscribe((response) => {
+      this.actionItems = this.actionItems.filter((actionItem) => {
+        return actionItem.id !== actionItemId;
+      });
+    });
+  }
+
+  openItem(content, itemId) {
+    console.log(itemId);
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      console.log(`Modal result: ${result}`);
+      if (result) {
+        this.deleteRetroItemById(itemId);
+      }
+    }, (reason) => {
+      console.log(`Modal dismissed: ${reason}`);
+    });
+  }
+
+  openActionItem(content, actionItemId) {
+    console.log(actionItemId);
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      console.log(`Modal result: ${result}`);
+      if (result) {
+        this.deleteRetroActionItemById(actionItemId);
+      }
+    }, (reason) => {
+      console.log(`Modal dismissed: ${reason}`);
+    });
+  }
+
+  itemIsDone(item: Item) {
+    item.itemFlag = !item.itemFlag;
+    console.log(item.id);
+    console.log(item.itemFlag);
+    this.retroService.updateRetroItemById(item);
+  }
+
+  upVoteItem(item: Item) {
+    item.itemVotes = item.itemVotes + 1;
+    console.log('Item ID: ' + item.id);
+    console.log('Current vote: ' + item.itemVotes);
+    this.retroService.updateRetroItemById(item);
+  }
+
+  downVoteItem(item: Item) {
+    item.itemVotes = item.itemVotes - 1;
+    console.log('Item ID: ' + item.id);
+    console.log('Current vote: ' + item.itemVotes);
+    this.retroService.updateRetroItemById(item);
+  }
+
+  openItemEditor(content, item) {
+    console.log(item);
+    this.editItem = JSON.parse(JSON.stringify(item));
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title-edit-item'}).result.then((result) => {
+      console.log(`Modal result: ${result}`);
+      if (result) {
+        this.updateItemDescription(this.editItem);
+      }
+    }, (reason) => {
+      console.log(`Modal dismissed: ${reason}`);
+    });
+  }
+
+  updateActionItemDescription(actionItem: ActionItem) {
+    console.log(actionItem.id);
+    console.log(actionItem.description);
+    this.retroService.updateRetroActionItemById(actionItem);
+  }
+
+  openActionItemEditor(content, actionItem) {
+    console.log(actionItem);
+    this.editActionItem = JSON.parse(JSON.stringify(actionItem));
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title-edit-action-item'}).result.then((result) => {
+      console.log(`Modal result: ${result}`);
+      if (result) {
+        this.updateActionItemDescription(this.editActionItem);
+      }
+    }, (reason) => {
+      console.log(`Modal dismissed: ${reason}`);
+    });
+  }
+
   getRetroItemsAndExportToCSV() {
     // get retros items and export to csv
     console.log('exporting retro items');
@@ -173,120 +287,6 @@ export class RetrosComponent implements OnInit, OnDestroy {
         window.URL.revokeObjectURL(data);
         link.remove();
       }, 100);
-    });
-  }
-
-  sortItems(itemsArray: Item[]): Item[] {
-    // sort items by if item is done or not: method needs work
-    return itemsArray.sort((a, b) => {
-      return (a.itemFlag === b.itemFlag) ? 0 : a.itemFlag ? 1 : -1;
-    });
-  }
-
-  getRetroActionItems() {
-    // get retros action items
-    console.log('fetching retro action items');
-    this.retroService.getRetroActionItemsById(this.id).subscribe(response => {
-      this.actionItems = response.body;
-    });
-  }
-
-  deleteRetroItemById(itemId) {
-    this.retroService.deleteRetroItemById(itemId).subscribe((response) => {
-      this.retroService.items = this.retroService.items.filter((item) => {
-        return item.id !== itemId;
-      });
-    });
-  }
-
-  deleteRetroActionItemById(actionItemId) {
-    this.retroService.deleteRetroActionItemById(actionItemId).subscribe((response) => {
-      this.actionItems = this.actionItems.filter((actionItem) => {
-        return actionItem.id !== actionItemId;
-      });
-    });
-  }
-
-  openItem(content, itemId) {
-    console.log(itemId);
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-      console.log(`Modal result: ${result}`);
-      if (result) {
-        this.deleteRetroItemById(itemId);
-      }
-    }, (reason) => {
-      console.log(`Modal dismissed: ${reason}`);
-    });
-  }
-
-  openActionItem(content, actionItemId) {
-    console.log(actionItemId);
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-      console.log(`Modal result: ${result}`);
-      if (result) {
-        this.deleteRetroActionItemById(actionItemId);
-      }
-    }, (reason) => {
-      console.log(`Modal dismissed: ${reason}`);
-    });
-  }
-
-  itemIsDone(item: Item) {
-    item.itemFlag = !item.itemFlag;
-    console.log(item.id);
-    console.log(item.itemFlag);
-    this.retroService.updateRetroItemById(item);
-  }
-
-  upVoteItem(item: Item) {
-    item.itemVotes = item.itemVotes + 1;
-    console.log('Item ID: ' + item.id);
-    console.log('Current vote: ' + item.itemVotes);
-    this.retroService.updateRetroItemById(item);
-  }
-
-  downVoteItem(item: Item) {
-    item.itemVotes = item.itemVotes - 1;
-    console.log('Item ID: ' + item.id);
-    console.log('Current vote: ' + item.itemVotes);
-    this.retroService.updateRetroItemById(item);
-  }
-
-  updateItemDescription(item: Item) {
-    console.log(item.id);
-    console.log(item.description);
-    this.retroService.updateRetroItemById(item);
-  }
-
-  openItemEditor(content, item) {
-    console.log(item);
-    this.editItem = JSON.parse(JSON.stringify(item));
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title-edit-item'}).result.then((result) => {
-      console.log(`Modal result: ${result}`);
-      if (result) {
-        this.updateItemDescription(this.editItem);
-      }
-    }, (reason) => {
-      console.log(`Modal dismissed: ${reason}`);
-    });
-  }
-
-  updateActionItemDescription(actionItem: ActionItem) {
-    console.log(actionItem.id);
-    console.log(actionItem.description);
-    this.retroService.updateRetroActionItemById(actionItem);
-  }
-
-  openActionItemEditor(content, actionItem) {
-    console.log(actionItem);
-    this.editActionItem = JSON.parse(JSON.stringify(actionItem));
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title-edit-action-item'}).result.then((result) => {
-      console.log(`Modal result: ${result}`);
-      if (result) {
-        this.updateActionItemDescription(this.editActionItem);
-      }
-    }, (reason) => {
-      console.log(`Modal dismissed: ${reason}`);
     });
   }
 }

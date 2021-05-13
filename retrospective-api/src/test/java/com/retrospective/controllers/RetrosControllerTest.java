@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.retrospective.models.ActionItem;
 import com.retrospective.models.Item;
 import com.retrospective.models.Retro;
+import com.retrospective.models.SentimentAnalysis;
 import com.retrospective.services.RetrosService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -159,6 +160,27 @@ class RetrosControllerTest {
 				.content(expectedJsonResponse))
 				.andDo(print())
 				.andExpect(status().isOk());
+	}
+	
+	// test to get a retro's sentiment analysis by retro Id when it exists
+	// ensures the returned response from /api/retros/{retroId}/items/sentiment-analysis
+	// matches the expected sentiment analysis and gives a 200 response code
+	@Test
+	void getSentimentAnalysisByRetroIdWhenIdExists() throws Exception {
+		// given
+		Retro retro1 = new Retro();
+		retro1.setId(1L);
+		SentimentAnalysis expectedSentimentAnalysis = new SentimentAnalysis(
+				"Thorough discussion on design of our new product. Excited as this will give us the ability to quickly proceed with development",
+				5, retro1);
+		String expectedJsonResponse = new ObjectMapper().writeValueAsString(expectedSentimentAnalysis);
+		when(retrosService.getRetroItemsByIdForSentimentAnalysis(1L)).thenReturn(expectedSentimentAnalysis);
+		
+		// when & then
+		this.mockMvc.perform(get("/api/retros/1/items/sentiment-analysis"))
+				.andDo(print())
+				.andExpect(status().isOk())
+				.andExpect(content().json(expectedJsonResponse));
 	}
 	
 }
