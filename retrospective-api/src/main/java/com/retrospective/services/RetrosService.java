@@ -131,13 +131,16 @@ public class RetrosService {
 	
 	// method to perform a sentiment analysis on a retrospective's items by retro id
 	public SentimentAnalysis getRetroItemsByIdForSentimentAnalysis(Long id) throws IOException {
+		// creating instance of retro and sentiment analysis objects
 		Retro retro = new Retro();
 		SentimentAnalysis sentimentAnalysis = new SentimentAnalysis();
+		// setting retro id to that given from path variable
 		retro.setId(id);
 		
 		float retrospectiveItemScore = 0;
 		String wordLine;
 		
+		// reading in all stop words using buffered reader and adding them to an arraylist
 		ArrayList<String> stopWords = new ArrayList<>();
 		BufferedReader stopWordsBuffReader = new BufferedReader(new FileReader("src/main/resources/Dictionaries/stopWords.txt"));
 		
@@ -146,6 +149,7 @@ public class RetrosService {
 		}
 		stopWordsBuffReader.close();
 		
+		// reading in all AFINN words and their scores using buffered reader and adding them to a hashmap
 		Map<String, String> AfinnDictionary = new HashMap<>();
 		BufferedReader AfinnBuffReader = new BufferedReader(new FileReader("src/main/resources/Dictionaries/AFINN-en-165.txt"));
 		while ((wordLine = AfinnBuffReader.readLine()) != null) {
@@ -154,9 +158,18 @@ public class RetrosService {
 		}
 		AfinnBuffReader.close();
 		
+		// getting retrospective item words, coverting object to string, removing anything that is not
+		// and alphabetical char, and trimming white space
 		String retroItemWords = (itemsRepository.findAllByRetroId(id).toString().replaceAll("[^a-zA-Z]", " ")).trim();
+		// splitting retro item words by white space and adding them to array
 		String[] words = retroItemWords.split(" ");
 		
+		// for loop that compares each words in retroItemWords against the stop words,
+		// if word is present in stop words array, its skipped
+		
+		// if word is not present amongst stop words, its sentiment score is gotten from afinn dictionary and retro sentiment score
+		// is updated
+		// this continues until there are no more words left to check in retroItemWords
 		for (String word : words) {
 			if (stopWords.contains(word.toLowerCase())) {
 				// skip word
@@ -164,11 +177,13 @@ public class RetrosService {
 			} else {
 				if (AfinnDictionary.get(word) != null) {
 					String wordScore = AfinnDictionary.get(word.toLowerCase());
+					// continuously amending and setting sentiment score
 					retrospectiveItemScore = retrospectiveItemScore + Integer.parseInt(wordScore);
 					sentimentAnalysis.setScore(retrospectiveItemScore);
 				}
 			}
 		}
+		// when overall sentiment score determined, associated retro, retro id and retro words string is added to sentimentAnalysis object
 		sentimentAnalysis.setRetro(retro);
 		sentimentAnalysis.setId(retro.getId());
 		sentimentAnalysis.setRetroItems(retroItemWords);
@@ -177,11 +192,14 @@ public class RetrosService {
 	}
 	
 	public List<Item> getRetroItemsAndExportToCSV(Long id, HttpServletResponse response) throws IOException, RetrosNotFoundException {
+		// setting response file type to be CSV file
 		response.setContentType("text/csv");
+		// getting date for outputted file name
 		DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
 		String currentDateTime = dateFormatter.format(new Date());
 		
 		String headerKey = "Content-Disposition";
+		// setting response file name which includes retro name, id, and currentDateTime
 		String headerValue = "attachment; filename=retrospective_" +
 				this.getRetroById(id).getName() +
 				"_items_ID-" + id + "_" + currentDateTime + ".csv";
@@ -189,7 +207,7 @@ public class RetrosService {
 		response.setHeader(headerKey, headerValue);
 		
 		List<Item> listItems = this.getRetroItemsById(id);
-		
+		// pairing headings to item vars and mapping to csv
 		ICsvBeanWriter csvWriter = new CsvBeanWriter(response.getWriter(), CsvPreference.STANDARD_PREFERENCE);
 		String[] csvHeader = {"Item ID", "Created", "Description", "Type", "Votes"};
 		String[] nameMapping = {"id", "created", "description", "type", "itemVotes"};

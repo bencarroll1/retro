@@ -6,6 +6,8 @@ import {Retro} from '../../models/retro';
   name: 'retroFilter',
   pure: false
 })
+
+// pipe to filter retrospectives by name in searching
 export class RetroPipe implements PipeTransform {
   transform(retros: Retro[], retroNameFilter: string): Retro[] {
     if (!retros || !retroNameFilter) {

@@ -37,7 +37,6 @@ export class ItemFormComponent implements OnInit {
       type: this.itemType
     };
     // on submission call the add item to retro method, add the item to the specified retro
-    // tslint:disable-next-line:no-shadowed-variable
     this.retroService.addItemToRetro(item, this.retroId).subscribe((item: Item) => {
       this.retroService.items.unshift(item);
       console.log(item);

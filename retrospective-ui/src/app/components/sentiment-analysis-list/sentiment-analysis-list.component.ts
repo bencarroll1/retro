@@ -18,6 +18,7 @@ export class SentimentAnalysisListComponent implements OnInit {
   faSearch = faSearch;
   faSignInAlt = faSignInAlt;
 
+  // creating array of retrospectives to be displayed on this page
   retros: Retro[] = [];
 
   sentimentAnalysisListRetroFilter: string;
@@ -25,12 +26,14 @@ export class SentimentAnalysisListComponent implements OnInit {
   constructor(private retroService: RetroService) {
   }
 
+  // retrospectives will be retrieved upon initialisation of this page
   ngOnInit(): void {
     this.retroService.getRetros().subscribe((response) => {
       this.retros = this.sortRetros(response.body);
     });
   }
 
+  // method to sort retrospectives according to date of creation
   sortRetros(retrosArray: Retro[]): Retro[] {
     // sort retrospectives by date
     return retrosArray.sort((a, b) => {

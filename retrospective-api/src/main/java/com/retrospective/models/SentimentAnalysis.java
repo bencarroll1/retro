@@ -22,7 +22,7 @@ import javax.persistence.*;
 // mapping items to custom SQL table using JPA
 @Table(name = "sentimentAnalysis")
 public class SentimentAnalysis extends BaseEntity {
-	//setting columns in items table
+	//setting columns in sentiment analysis table
 	@Column(name = "retroItems", nullable = false)
 	private String retroItems;
 	

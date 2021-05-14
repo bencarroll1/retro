@@ -2,7 +2,16 @@ import {Component, OnInit} from '@angular/core';
 import {RetroService} from '../../services/retro.service';
 import {Retro} from '../../models/retro';
 
-import {faArchive, faCheck, faExclamationCircle, faHome, faSearch, faSignInAlt, faTrash, faChartLine} from '@fortawesome/free-solid-svg-icons';
+import {
+  faArchive,
+  faChartLine,
+  faCheck,
+  faExclamationCircle,
+  faHome,
+  faSearch,
+  faSignInAlt,
+  faTrash
+} from '@fortawesome/free-solid-svg-icons';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
@@ -63,7 +72,7 @@ export class RetrosListComponent implements OnInit {
     });
   }
 
-  // MODAL STUFF
+  // modal dialog
   open(content, retroId) {
     console.log(retroId);
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {

@@ -4,6 +4,8 @@ import {Retro} from '../../models/retro';
 @Pipe({
   name: 'sentimentAnalysisListRetroFilter'
 })
+
+// pipe to filter the list of retrieved retrospectives when searching
 export class SentimentAnalysisListPipe implements PipeTransform {
   transform(retros: Retro[], retroNameFilter: string): Retro[] {
     if (!retros || !retroNameFilter) {

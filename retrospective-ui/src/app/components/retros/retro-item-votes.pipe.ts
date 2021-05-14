@@ -5,6 +5,8 @@ import {Item} from '../../models/item';
   name: 'sortByVotes',
   pure: false
 })
+
+// pipe to sort retrospective items by no. of votes
 export class RetroItemVotesPipe implements PipeTransform {
   transform(items: Item[], args?: any): Item[] {
     return items.sort((a: Item, b: Item) => {

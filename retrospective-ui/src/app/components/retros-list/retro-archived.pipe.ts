@@ -6,6 +6,8 @@ import {Retro} from '../../models/retro';
   name: 'retroArchiveFilter',
   pure: false
 })
+
+// pipe to filter retrospectives by archive status
 export class RetroArchivedPipe {
   transform(retros: Retro[], retroArchiveFilter: boolean) {
     if (!retroArchiveFilter) {

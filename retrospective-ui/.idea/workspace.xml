@@ -2,25 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8550fa3e-9d20-4d74-84e3-258db6651cc0" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../retrospective-api/src/main/java/com/retrospective/configs/LoadDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/../retrospective-api/src/main/java/com/retrospective/configs/LoadDatabase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../retrospective-api/src/main/java/com/retrospective/controllers/RetrosController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../retrospective-api/src/main/java/com/retrospective/controllers/RetrosController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../retrospective-api/src/main/java/com/retrospective/exceptions/ActionItemNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/../retrospective-api/src/main/java/com/retrospective/exceptions/ActionItemNotFoundException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../retrospective-api/src/main/java/com/retrospective/exceptions/ItemNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/../retrospective-api/src/main/java/com/retrospective/exceptions/ItemNotFoundException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../retrospective-api/src/main/java/com/retrospective/exceptions/RetrosNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/../retrospective-api/src/main/java/com/retrospective/exceptions/RetrosNotFoundException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../retrospective-api/src/main/java/com/retrospective/models/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/../retrospective-api/src/main/java/com/retrospective/models/Item.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../retrospective-api/src/main/java/com/retrospective/services/RetrosService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../retrospective-api/src/main/java/com/retrospective/services/RetrosService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../retrospective-api/src/main/resources/Dictionaries/TestRetroItems.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../retrospective-api/src/test/java/com/retrospective/controllers/RetrosControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../retrospective-api/src/test/java/com/retrospective/controllers/RetrosControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../retrospective-api/src/test/java/com/retrospective/services/RetrosServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../retrospective-api/src/test/java/com/retrospective/services/RetrosServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../retrospective-api/target/classes/Dictionaries/TestRetroItems.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../retrospective-api/target/classes/com/retrospective/configs/LoadDatabase.class" beforeDir="false" afterPath="$PROJECT_DIR$/../retrospective-api/target/classes/com/retrospective/configs/LoadDatabase.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../retrospective-api/target/classes/com/retrospective/controllers/RetrosController.class" beforeDir="false" afterPath="$PROJECT_DIR$/../retrospective-api/target/classes/com/retrospective/controllers/RetrosController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../retrospective-api/target/classes/com/retrospective/services/RetrosService.class" beforeDir="false" afterPath="$PROJECT_DIR$/../retrospective-api/target/classes/com/retrospective/services/RetrosService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../retrospective-api/target/test-classes/com/retrospective/controllers/RetrosControllerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/../retrospective-api/target/test-classes/com/retrospective/controllers/RetrosControllerTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../retrospective-api/target/test-classes/com/retrospective/services/RetrosServiceTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/../retrospective-api/target/test-classes/com/retrospective/services/RetrosServiceTest.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app-routing.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/action-item-form/action-item-form.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/action-item-form/action-item-form.component.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/archived-retros/archived-retros.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/archived-retros/archived-retros.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/components/item-form/item-form.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/item-form/item-form.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/retros/retros.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/retros/retros.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/retros-list/retro-archived.pipe.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/retros-list/retro-archived.pipe.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/retros-list/retro.pipe.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/retros-list/retro.pipe.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/retros-list/retros-list.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/retros-list/retros-list.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/retros-list/retros-list.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/retros-list/retros-list.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/retros/retro-item-votes.pipe.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/retros/retro-item-votes.pipe.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/sentiment-analysis-list/sentiment-analysis-list.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/sentiment-analysis-list/sentiment-analysis-list.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/sentiment-analysis-list/sentiment-analysis-list.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/sentiment-analysis-list/sentiment-analysis-list.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/sentiment-analysis-list/sentiment-analysis-list.pipe.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/sentiment-analysis-list/sentiment-analysis-list.pipe.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/sentiment-analysis/sentiment-analysis.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/sentiment-analysis/sentiment-analysis.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/sentiment-analysis/sentiment-analysis.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/sentiment-analysis/sentiment-analysis.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,6 +27,14 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="ProjectId" id="1sIo0SBZEZRc6869Yn8ljVeWh0F" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -97,7 +103,9 @@
       <workItem from="1620760249985" duration="1710000" />
       <workItem from="1620837778729" duration="503000" />
       <workItem from="1620898927159" duration="4501000" />
-      <workItem from="1620912979779" duration="620000" />
+      <workItem from="1620912979779" duration="1092000" />
+      <workItem from="1621000743257" duration="644000" />
+      <workItem from="1621011579645" duration="2467000" />
     </task>
     <servers />
   </component>

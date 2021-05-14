@@ -6,7 +6,7 @@ import {ArchivedRetrosComponent} from './components/archived-retros/archived-ret
 import {SentimentAnalysisComponent} from './components/sentiment-analysis/sentiment-analysis.component';
 import {SentimentAnalysisListComponent} from './components/sentiment-analysis-list/sentiment-analysis-list.component';
 
-// routing for frontend endpoints
+// routing for frontend endpoints - component specified is served at specified endpoint
 const routes: Routes =
   [{path: 'retros', component: RetrosListComponent},
     {
@@ -20,6 +20,7 @@ const routes: Routes =
     {path: 'sentiment-analysis', component: SentimentAnalysisListComponent}
   ];
 
+// hash used to hide api endpoint
 const routerConfig = {
   useHash: true
 };

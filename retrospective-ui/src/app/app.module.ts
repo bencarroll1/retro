@@ -50,7 +50,7 @@ import {NgCircleProgressModule} from 'ng-circle-progress';
 
     // Specify ng-circle-progress as an import
     NgCircleProgressModule.forRoot({
-      // set defaults here
+      // set defaults of circle
       outerStrokeColor: '#1B64EE',
       innerStrokeColor: '#3EACDF',
       animationDuration: 300,

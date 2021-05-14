@@ -26,11 +26,9 @@ export class SentimentAnalysisComponent implements OnInit {
 
   ngOnInit(): void {
     this.retroService.getRetroById(this.id).subscribe(response => this.retroName = response.body.name);
-
+    // get retros sentiment analysis on init
     this.retroService.getRetroItemsByIdForSentimentAnalysis(this.id)
       .subscribe(response => this.sentimentAnalysisScore = (response.body.score * 10)
-        // console.log(response.body);
-        // return JSON.stringify(response.body);
       );
   }
 

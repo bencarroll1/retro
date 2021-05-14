@@ -260,6 +260,7 @@ class RetrosServiceTest {
 		Assertions.assertNull(actualRetro.getName(), "name was not null");
 	}
 	
+	// test to get sentiment analysis by retro id when the sentiment analysis and retro exist in JPA repo's
 	@Test
 	void getSentimentAnalysisByRetroIdWhenRetroExists() throws IOException {
 		// given
