@@ -2,23 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8550fa3e-9d20-4d74-84e3-258db6651cc0" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../retrospective-api/target/classes/com/retrospective/services/RetrosService.class" beforeDir="false" afterPath="$PROJECT_DIR$/../retrospective-api/target/classes/com/retrospective/services/RetrosService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../retrospective-api/target/test-classes/com/retrospective/services/RetrosServiceTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/../retrospective-api/target/test-classes/com/retrospective/services/RetrosServiceTest.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app-routing.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/action-item-form/action-item-form.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/action-item-form/action-item-form.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/archived-retros/archived-retros.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/archived-retros/archived-retros.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/item-form/item-form.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/item-form/item-form.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/retros-list/retro-archived.pipe.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/retros-list/retro-archived.pipe.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/retros-list/retro.pipe.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/retros-list/retro.pipe.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/retros-list/retros-list.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/retros-list/retros-list.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/retros-list/retros-list.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/retros-list/retros-list.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/retros/retro-item-votes.pipe.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/retros/retro-item-votes.pipe.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/sentiment-analysis-list/sentiment-analysis-list.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/sentiment-analysis-list/sentiment-analysis-list.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/sentiment-analysis-list/sentiment-analysis-list.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/sentiment-analysis-list/sentiment-analysis-list.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/sentiment-analysis-list/sentiment-analysis-list.pipe.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/sentiment-analysis-list/sentiment-analysis-list.pipe.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/sentiment-analysis/sentiment-analysis.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/sentiment-analysis/sentiment-analysis.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/sentiment-analysis/sentiment-analysis.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/sentiment-analysis/sentiment-analysis.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,6 +92,8 @@
       <workItem from="1620912979779" duration="1092000" />
       <workItem from="1621000743257" duration="644000" />
       <workItem from="1621011579645" duration="2467000" />
+      <workItem from="1621016829182" duration="229000" />
+      <workItem from="1621088221396" duration="144000" />
     </task>
     <servers />
   </component>

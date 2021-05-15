@@ -1,4 +1,4 @@
-# Retrospective Application
+# Retro: A Retrospective Application
 
 This project aims facilitate sprint retrospectives remotely. It was made using the Angular framework with a Spring RESTful API, as well as Bootstrap.
 <br>
@@ -210,7 +210,3 @@ The API project is separated into configurations, controllers, exceptions, model
 
 
 ```
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
