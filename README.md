@@ -1,6 +1,6 @@
 # Retro: A Retrospective Application
 
-![Retro poster](retro-poster.GIF)
+![Retro poster](retro-poster.gif)
 
 This project aims facilitate sprint retrospectives remotely. It was made using the Angular framework with a Spring RESTful API, as well as Bootstrap.
 <br>
