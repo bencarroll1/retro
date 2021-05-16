@@ -1,5 +1,7 @@
 # Retro: A Retrospective Application
 
+![Retro poster](retro-poster.GIF)
+
 This project aims facilitate sprint retrospectives remotely. It was made using the Angular framework with a Spring RESTful API, as well as Bootstrap.
 <br>
 It is a CRUD application that utilises the Angular framework to make HTTP requests to a Spring RESTful API, storing data in a H2 in-memory relational database.
